@@ -257,7 +257,7 @@ public abstract class AbstractMethod implements CheckAccountNumber {
      * @param number
      * @return
      */
-    protected int[] expand(int[] number) {
+    protected int[] expand(final int[] number) {
         int[] tmp = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         int numberI = 0;
         for (int i = tmp.length - number.length; i < tmp.length; i++) {
@@ -312,4 +312,5 @@ public abstract class AbstractMethod implements CheckAccountNumber {
         }
         return 7 - number;
     }
+
 }

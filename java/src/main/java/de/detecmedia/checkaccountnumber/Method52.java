@@ -1,7 +1,7 @@
 package de.detecmedia.checkaccountnumber;
 
-import de.detecmedia.checkaccountnumber.exception.InvalidBankCodeException;
 import java.util.Arrays;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -40,7 +40,7 @@ import org.apache.log4j.Logger;
  * 13051172           4P001500
  * </pre>
  * <p>
- *
+ * <p>
  * Konto-Nr. Altsystem (Multiplikation mit Gewichten) </p>
  * <pre>
  *       1  1  7  2  -  4  P  -  1  5  0  0
@@ -67,105 +67,168 @@ import org.apache.log4j.Logger;
  * @version 0.0.2
  */
 public class Method52 extends AbstractMethod {
+    /**
+     * define logger.
+     */
+    private static final Logger LOG = Logger.getLogger(Method52.class);
+    /**
+     * Check digit.
+     */
+    private static final int CHECKDIGIT = 5;
+    /**
+     * MODULAR.
+     */
+    private static final int MODULAR11 = 11;
+    /**
+     * START is 0.
+     */
+    private static final int START = 0;
+    /**
+     * FACTOR = 10.
+     */
+    private static final int FACTOR = 10;
+    /**
+     * start positon from check.
+     */
+    private static final int CHECKSTARTPOS = 6;
 
-    private static final Logger log = Logger.getLogger(Method52.class);
+    /**
+     * Set first 9.
+     */
+    private static final int FIRSTNUMBER = 9;
 
-    public boolean check(int[] weighting) {
+    /**
+     * Weighting.
+     */
+    private static final int[] WEIGHING =
+            new int[]{2, 4, 8, 5, 10, 9, 7, 3, 6, 1, 2, 4};
+
+    /**
+     * check.
+     *
+     * @param weighting weithing array
+     * @return boolean
+     */
+    public boolean check(final int[] weighting) {
 
         int[] number = this.getAccountNumberArray();
-        int numberPz = number[5];
-        number[5] = 0;
+        int numberPz = number[CHECKDIGIT];
+        number[CHECKDIGIT] = 0;
         number = factor(number, weighting, 1, number.length);
-        int pz = add(number, 0, number.length);
-        int tmp = pz % 11;
-        log.debug("tmp : " + tmp);
+        int pz = add(number, START, number.length);
+        int tmp = pz % MODULAR11;
+        LOG.debug("tmp : " + tmp);
         int i = 0;
-        
+
         do {
-            log.debug("tmp : " + tmp);
-            pz = (tmp + i * 10) % 11;
-            if (pz != 10) {
+            LOG.debug("tmp : " + tmp);
+            pz = (tmp + i * FACTOR) % MODULAR11;
+            if (pz != FACTOR) {
                 i++;
             }
 
-            log.debug("pz: " + pz);
-        } while (pz != 10);
-        number[5] = numberPz;
-        log.debug("i: " + i);
-        if (checkPz(i, number, 6)) {
-            return true;
-        }
+            LOG.debug("pz: " + pz);
+        } while (pz != FACTOR);
 
-        if (number.length == 10 && number[0] == 9) {
-            return checkMethod20();
-        }
-        return false;
+        number[CHECKDIGIT] = numberPz;
+        LOG.debug("i: " + i);
+
+        return checkPz(i, number, CHECKSTARTPOS)
+                || number.length == FACTOR
+                && number[0] == FIRSTNUMBER
+                && checkMethod20();
+
     }
 
+    /**
+     * Override add.
+     *
+     * @param number number array
+     * @param start  start pos
+     * @param end    end pos
+     * @return int[]
+     */
     @Override
-    protected int add(int[] number, int start, int end) {
-        log.debug(start + " to " + end);
+    protected int add(final int[] number, final int start, final int end) {
+        LOG.debug(start + " to " + end);
         int pz = 0;
-        for (int i = start--; i < end; i++) {
+        for (int i = start; i < end; i++) {
             int o = number[i];
-            log.debug("+" + number[i]);
+            LOG.debug("+" + number[i]);
             pz += o;
         }
-        log.debug("after add: " + pz);
+        LOG.debug("after add: " + pz);
         return pz;
     }
 
-    protected boolean checkMethod20() {
+    /**
+     * use method 20.
+     *
+     * @return boolean
+     */
+    private boolean checkMethod20() {
         Method20 method20 = new Method20();
         method20.setAccountNumber(accountNumber);
         return method20.test();
     }
 
+    /**
+     * test from method 52.
+     * @return boolean
+     */
     @Override
     public boolean test() {
-        weighting = new int[]{2, 4, 8, 5, 10, 9, 7, 3, 6, 1, 2, 4};
-        return this.check(weighting);
-
+        return this.check(WEIGHING);
     }
 
+    /**
+     * override factor for method 52.
+     * @param number number array
+     * @param weighting weighting
+     * @param start start pos
+     * @param end end pos
+     * @return int[]
+     */
     @Override
-    protected int[] factor(int[] number, int[] weighting, int start, int end) {
+    protected int[] factor(
+            final int[] number,
+            final int[] weighting,
+            final int start,
+            final int end
+    ) {
 
-        start--;
-        log.debug("start: " + start);
-        log.debug("end: " + end);
-        log.debug("tmp array:" + (end - start));
-        int[] tmp = new int[(end - start)];
-        log.debug("tmp.lenght " + tmp.length);
+        int startpos = start - 1;
+        LOG.debug("start: " + startpos);
+        LOG.debug("end: " + end);
+        LOG.debug("tmp array:" + (end - startpos));
+        int[] tmp = new int[(end - startpos)];
+        LOG.debug("tmp.lenght " + tmp.length);
         //end--;
-        log.debug("number:" + Arrays.toString(number));
-        log.debug("weighting:" + Arrays.toString(weighting));
+        LOG.debug("number:" + Arrays.toString(number));
+        LOG.debug("weighting:" + Arrays.toString(weighting));
 
         int tmpI = 0;
-        for (int i = start; i < end; i++) {
-
+        for (int i = startpos; i < end; i++) {
             tmp[tmpI] = number[i];
-
             tmpI++;
-
         }
         tmpI = 0;
         for (int i = tmp.length - 1; i != -1; i--) {
             int u = tmp[i];
             if (tmpI < weighting.length) {
-                log.debug(u + " * " + weighting[tmpI]);
+                LOG.debug(u + " * " + weighting[tmpI]);
                 tmp[i] *= weighting[tmpI];
                 tmpI++;
             }
         }
-        log.debug("tmp: " + Arrays.toString(tmp));
+        LOG.debug("tmp: " + Arrays.toString(tmp));
         tmpI = 0;
 
-        log.debug("tmp " + start + "-" + end + ": " + Arrays.toString(tmp));
-        for (int i = start; i < end; i++) {
+        LOG.debug("tmp " + startpos + "-" + end + ": " + Arrays.toString(tmp));
+        for (int i = startpos; i < end; i++) {
             number[i] = tmp[tmpI++];
         }
-        log.debug("number: " + Arrays.toString(number));
+        LOG.debug("number: " + Arrays.toString(number));
         return number;
     }
 

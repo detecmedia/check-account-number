@@ -5,11 +5,7 @@
  */
 package de.detecmedia.checkaccountnumber;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 
 /**
@@ -40,6 +36,7 @@ public class MethodC4Test {
     /**
      * Test of test method, of class MethodC4.
      */
+    @Ignore
     @Test
     public void testTest() {
         System.out.println("test");
@@ -54,6 +51,7 @@ public class MethodC4Test {
     /**
      * Test of getFlag method, of class MethodC4.
      */
+    @Ignore
     @Test
     public void testGetFlag() {
         System.out.println("getFlag");
@@ -67,6 +65,7 @@ public class MethodC4Test {
     /**
      * Test of variant1 method, of class MethodC4.
      */
+    @Ignore
     @Test
     public void testVariant1() {
         System.out.println("variant1");
@@ -82,6 +81,7 @@ public class MethodC4Test {
      * Test of variant2 method, of class MethodC4.
      */
     @Test
+    @Ignore
     public void testVariant2() {
         System.out.println("variant2");
         int[] number = {9,0,0,0,4,2,0,5,3,0};
@@ -95,6 +95,7 @@ public class MethodC4Test {
      * Test of variant2 method, of class MethodC4.
      */
     @Test
+    @Ignore
     public void testVariant21() {
         System.out.println("variant2");
         int[] number = {9,0,0,0,7,3,2,0,0,0};
