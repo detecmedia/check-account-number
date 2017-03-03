@@ -36,7 +36,6 @@ public class Method00 extends AbstractMethod {
     protected boolean check(int[] weighting) {
         int[] number = expand(this.getAccountNumberArray());
 
-        int pos = 0;
         log.debug("number: " + Arrays.toString(number));
         // Stellen der Kontonummer sind von rechts nach links mit den Ziffern 2, 1, 2, 1, 2 usw. zu multiplizieren.
         number = this.factor(number, weighting);

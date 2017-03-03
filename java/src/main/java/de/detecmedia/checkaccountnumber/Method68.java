@@ -72,22 +72,46 @@ import org.apache.log4j.Logger;
  */
 public class Method68 extends Method00 {
 
+    /**
+     * Number length.
+     */
+    private static final int NUMBERLENGTH = 10;
+
+    /**
+     * start.
+     */
+    private static final int START = 3;
+
+    /**
+     * varinate 0 start.
+     */
+    private static final int VARIANT0START = 4;
+    /**
+     * end.
+     */
+    private static final int END = 9;
+
+    /**
+     * Logger.
+     */
     private final Logger log = Logger.getLogger(Method68.class);
 
+    /**
+     * Test method 68.
+     *
+     * @return boolean
+     */
     @Override
     public boolean test() {
+        this.log.debug("test method 68");
         int[] number = this.getAccountNumberArray();
 
-        if (variant0(number.clone()) && number.length == 10  && number[3] == 9 && number[0] != 0) {
-            return true;
-        }
-        if (variant1(number.clone())) {
-            return true;
-        }
-        if (variant2(number.clone())) {
-            return true;
-        }
-        return false;
+        return (variant0(number.clone())
+                && number.length == Method68.NUMBERLENGTH
+                && number[START] == END
+                && number[0] != 0)
+                || variant1(number.clone())
+                || variant2(number.clone());
     }
 
     /**
@@ -116,23 +140,20 @@ public class Method68 extends Method00 {
      * Kontonummer lautet: 8 8 8 9 6 5 4 3 2 8 6- bis 9-stellige Kontonummern
      * sind in zwei Varianten prüfbar.</p>
      *
-     * @param number
-     * @return
+     * @param number number array
+     * @return boolean
      */
-    boolean variant0(int[] number) {
-        number = expand(number);
+    private boolean variant0(final int[] number) {
+        int[] n = expand(number);
         weighting = new int[]{2, 1, 2, 1, 2, 1, 2, 1, 2};
-        number = factor(number, weighting,4,9);
-        int pz = add(number,3,9);
+        n = factor(n, weighting, VARIANT0START, END);
+        int pz = add(n, START, END);
         pz = modulus10(pz);
 
-        return checkPz(pz, number);
-
+        return checkPz(pz, n);
     }
 
     /**
-     *
-     *
      * <p>
      * <b>Variante 1:</b> voll prüfbar</p>
      * <pre>
@@ -151,17 +172,17 @@ public class Method68 extends Method00 {
      * <p>
      * Ergibt die Berechnung nach Variante 1 einen Prüfzifferfehler, muss
      * Variante 2 zu einer korrekten Prüfziffer führen.</p>
-     *
+     * @param number number array
+     * @return boolean
      */
-    boolean variant1(int[] number) {
-        number = expand(number);
+    final boolean variant1(final int[] number) {
+        int[] n = expand(number);
         weighting = new int[]{2, 1, 2, 1, 2, 1, 2, 1, 2};
-        number = factor(number, weighting);
-        int pz = add(number);
+        n = factor(n, weighting);
+        int pz = add(n);
         pz = modulus10(pz);
 
-        return checkPz(pz, number);
-
+        return checkPz(pz, n);
     }
 
     /**
@@ -186,16 +207,17 @@ public class Method68 extends Method00 {
      * 9-stellige Kontonummern im Nummernbereich 400 000 000 bis 499 999 999
      * sind nicht prüfbar, da diese Nummern keine Prüfziffer enthalten.</p>
      *
-     * @return
+     * @param number number array
+     * @return boolean
      */
-    boolean variant2(int[] number) {
-        number = expand(number);
+    final boolean variant2(final int[] number) {
+        int[] n = expand(number);
         weighting = new int[]{2, 1, 2, 1, 2, 0, 0, 1, 2, 1, 2};
-        number = factor(number, weighting);
-        int pz = add(number);
+        n = factor(n, weighting);
+        int pz = add(n);
         pz = modulus10(pz);
 
-        return checkPz(pz, number);
+        return checkPz(pz, n);
     }
 
 }
