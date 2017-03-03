@@ -24,26 +24,14 @@ package de.detecmedia.checkaccountnumber;
  * @see Method06
  */
 public class Method38 extends Method06 {
-    /**
-     * A.
-     */
-    private static final int A = 10;
-    /**
-     * WEIGHTING.
-     */
-    private static final int[] WEIGHTING = new int[]{2, 4, 8, 5, A, 9};
 
-    /**
-     * test method 38.
-     *
-     * @return boolean
-     */
     @Override
     public boolean test() {
-
+        int A = 10;
+        weighting = new int[]{2, 4, 8, 5, A, 9};
         int[] number = this.expand(this.getAccountNumberArray());
 
-        number = this.factor(number, WEIGHTING);
+        number = this.factor(number, weighting);
 
         int pz = this.add(number);
 
