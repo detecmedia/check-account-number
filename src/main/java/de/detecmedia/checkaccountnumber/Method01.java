@@ -20,19 +20,27 @@ import org.apache.log4j.Logger;
 public class Method01 extends AbstractMethod {
 
     /**
-     * Logger for this class
+     * Logger for this class.
      */
     private static Logger log = Logger.getLogger(Method01.class);
 
-    private int[] weighting;
-
+    /**
+     * test method 01.
+     *
+     * @return boolean
+     */
     @Override
     public boolean test() {
-        weighting = new int[]{3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1};
-        return this.check(weighting);
+        return this.check(WEIGHTING_3_7_1_3_7_1_3_7_1_3_7_1);
     }
 
-    protected boolean check(int[] weighting) {
+    /**
+     * check.
+     *
+     * @param weighting weighting array
+     * @return boolean
+     */
+    protected boolean check(final int[] weighting) {
         int[] number = this.getAccountNumberArray();
 
         number = this.factor(number, weighting);
@@ -44,11 +52,18 @@ public class Method01 extends AbstractMethod {
         return checkPz(pz, number);
     }
 
+    /**
+     * addition.
+     * @param number account number array
+     * @param start  start pos
+     * @param end    end pos
+     * @return int
+     */
     @Override
-    protected int add(int[] number, int start, int end) {
+    protected int add(final int[] number, final int start, final int end) {
         log.debug(start + " to " + end);
         int pz = 0;
-        for (int i = start--; i < end; i++) {
+        for (int i = start; i < end; i++) {
 
             int o = number[i];
             log.debug("+" + o);

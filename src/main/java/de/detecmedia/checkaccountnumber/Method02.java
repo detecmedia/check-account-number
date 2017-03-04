@@ -23,18 +23,28 @@ import org.apache.log4j.Logger;
  * @version 0.0.2
  */
 public class Method02 extends AbstractMethod {
-
+    /**
+     * define class logger.
+     */
     private static Logger log = Logger.getLogger(Method02.class);
 
-    private int[] weighting;
-
+    /**
+     * test method 02.
+     *
+     * @return boolean
+     */
     @Override
     public boolean test() {
-        weighting = new int[]{2, 3, 4, 5, 6, 7, 8, 9, 2};
-        return check(weighting);
+        return check(WEIGHTING_2_3_4_5_6_7_8_9_2);
     }
 
-    protected boolean check(int[] weighting) {
+    /**
+     * check.
+     *
+     * @param weighting weighting array
+     * @return boolean
+     */
+    protected boolean check(final int[] weighting) {
         log.debug("factor: " + Arrays.toString(weighting));
         int[] number = this.getAccountNumberArray();
         log.debug("number befor method->factor: " + Arrays.toString(number));
@@ -47,11 +57,18 @@ public class Method02 extends AbstractMethod {
         return this.checkPz(pz, number);
     }
 
+    /**
+     * addition.
+     * @param number account number array
+     * @param start  start pos
+     * @param end    end pos
+     * @return int
+     */
     @Override
-    protected int add(int[] number, int start, int end) {
+    protected int add(final int[] number, final int start, final int end) {
         log.debug(start + " to " + end);
         int pz = 0;
-        for (int i = start--; i < end; i++) {
+        for (int i = start; i < end; i++) {
             log.debug("+" + number[i]);
             int o = number[i];
             pz += o;

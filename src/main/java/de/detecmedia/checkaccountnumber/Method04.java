@@ -17,16 +17,19 @@ import org.apache.log4j.Logger;
  */
 public class Method04 extends Method02 {
 
-    private static Logger log = Logger.getLogger("de.detecmedia.ceckaccountnumber.Methode04");
+    /**
+     * define logger.
+     */
+    private static final Logger LOG = Logger.getLogger(Method04.class);
 
-    private int[] weighting;
-
+    /**
+     * test method 04.
+     *
+     * @return boolean
+     */
     @Override
     public boolean test() {
-
-        weighting = new int[]{2, 3, 4, 5, 6, 7, 2, 3, 4};
-
-        return this.check(weighting);
+        LOG.debug("test mebtod 03");
+        return this.check(WEIGHTING_2_3_4_5_6_7_2_3_4);
     }
-
 }

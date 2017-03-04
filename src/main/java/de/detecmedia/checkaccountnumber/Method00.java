@@ -23,35 +23,45 @@ import org.apache.log4j.Logger;
  * @version 0.0.2
  */
 public class Method00 extends AbstractMethod {
-
+    /**
+     * define logger.
+     */
     private static Logger log = Logger.getLogger(Method00.class);
 
-    private int[] weighting;
-
-
+    /**
+     * test for method 00.
+     *
+     * @return boolean
+     */
     @Override
     public boolean test() {
-
-        weighting = new int[]{2, 1, 2, 1, 2, 1, 2, 1, 2, 1};
-        return check(weighting);
-
+        return check(WEIGHTING_2_1_2_1_2_1_2_1_2_1);
     }
 
-    protected boolean check(int[] weighting) {
+    /**
+     * check .
+     *
+     * @param weighting weighting int array
+     * @return boolean
+     */
+    protected boolean check(final int[] weighting) {
         int[] number = expand(this.getAccountNumberArray());
 
         log.debug("number: " + Arrays.toString(number));
-        // Stellen der Kontonummer sind von rechts nach links mit den Ziffern 2, 1, 2, 1, 2 usw. zu multiplizieren.
+        // Stellen der Kontonummer sind von rechts nach
+        // links mit den Ziffern 2, 1, 2, 1, 2 usw. zu multiplizieren.
         number = this.factor(number, weighting);
 
         int pz = this.add(number);
 
         pz = this.modulus10(pz);
-        if (pz == 10) {
+        if (pz == RESULT_IS_10) {
             pz = 0;
         }
         log.debug("pz: " + pz);
-        log.debug("last number of account number: " + number[number.length - 1]);
+        log.debug(
+                "last number of account number: "
+                        + number[number.length - 1]);
 
         return checkPz(pz, number);
 

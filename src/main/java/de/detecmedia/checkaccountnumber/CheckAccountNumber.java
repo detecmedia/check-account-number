@@ -69,11 +69,30 @@ public interface CheckAccountNumber {
      * weighting {2, 3, 4, 5, 6,7}
      */
     int[] WEIGHTING_2_3_4_5_6_7 = new int[]{2, 3, 4, 5, 6, 7};
+    /**
+     * weighting {3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1}.
+     */
+    int[] WEIGHTING_3_7_1_3_7_1_3_7_1_3_7_1 = new int[]{3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1};
 
     /**
      * weighting {2, 3, 4, 5, 6, 7, 8}.
      */
     int[] WEIGHTING_2_3_4_5_6_7_8 = new int[]{2, 3, 4, 5, 6, 7, 8};
+    /**
+     * weighting {2, 3, 4, 5, 6, 7, 8, 9, 2}.
+     */
+    int[] WEIGHTING_2_3_4_5_6_7_8_9_2 = new int[]{2, 3, 4, 5, 6, 7, 8, 9, 2};
+    /**
+     * weighting {2, 1, 2, 1, 2, 1, 2, 1, 2, 1}.
+     */
+    int[] WEIGHTING_2_1_2_1_2_1_2_1_2_1 = new int[]{2, 1, 2, 1, 2, 1, 2, 1, 2, 1};
+
+    /**
+     * weighting {2, 1, 2, 1, 2, 1, 2, 1, 2, 1}.
+     */
+    int[] WEIGHTING_2_3_4_5_6_7_2_3_4 = new int[]{2, 3, 4, 5, 6, 7, 2, 3, 4};
+
+
 
     /**
      * Factor starts at 1st.

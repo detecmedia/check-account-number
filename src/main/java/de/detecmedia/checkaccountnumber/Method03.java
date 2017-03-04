@@ -17,17 +17,20 @@ import org.apache.log4j.Logger;
  */
 public class Method03 extends Method01 {
 
-    private int[] weighting;
+    /**
+     * Logger for this Class.
+     */
+    private static final Logger LOG = Logger.getLogger(Method03.class);
 
     /**
-     * Logger for this Class
+     * test method 03.
+     *
+     * @return boolean
      */
-    private static Logger log = Logger.getLogger(Method03.class);
-
     @Override
     public boolean test() {
-        weighting = new int[]{2, 1, 2, 1, 2, 1, 2, 1, 2, 1};
-        return this.check(weighting);
+        LOG.debug("test mebtod 03");
+        return this.check(WEIGHTING_2_1_2_1_2_1_2_1_2_1);
     }
 
 }
