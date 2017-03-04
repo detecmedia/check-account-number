@@ -33,10 +33,25 @@ package de.detecmedia.checkaccountnumber;
  */
 public class MethodA3
         extends AbstractMethod {
+    /**
+     * Wiehting for varitant 1.
+     */
+    private static final int[] VARIANT_1_WEIGHTING =
+            new int[]{2, 1, 2, 1, 2, 1, 2, 1, 2};
+    /**
+     * weightig for variant 2.
+     */
+    private static final int[] VARIANT_2_WEIGHTING =
+            new int[]{2, 3, 4, 5, 6, 7, 8, 9, 10};
 
+    /**
+     * test method A3.
+     *
+     * @return boolean
+     */
     @Override
     public boolean test() {
-         int[] number = expand(this.getAccountNumberArray());
+        int[] number = expand(this.getAccountNumberArray());
         if (variant1(number)) {
             return true;
         }
@@ -44,18 +59,32 @@ public class MethodA3
         return variant2(number);
     }
 
-     boolean variant1(int[] number) {
-        weighting = new int[]{2, 1, 2, 1, 2, 1, 2, 1, 2};
+    /**
+     * Variante 1.
+     * use Method 00
+     *
+     * @param number number array
+     * @return boolean
+     */
+    final boolean variant1(final int[] number) {
+
         Method00 method00 = new Method00();
         method00.setAccountNumberArray(number);
-        return method00.check(weighting);
+        return method00.check(VARIANT_1_WEIGHTING);
     }
 
-     boolean variant2(int[] number) {
-         weighting = new int[]{2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    /**
+     * variante 2.
+     * use mehtod 10
+     *
+     * @param number number array
+     * @return boolean
+     */
+    final boolean variant2(final int[] number) {
+
         Method10 method10 = new Method10();
         method10.setAccountNumberArray(number);
-        return method10.check(weighting);
+        return method10.check(VARIANT_2_WEIGHTING);
     }
 
 }
