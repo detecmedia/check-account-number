@@ -62,35 +62,104 @@ import org.apache.log4j.Logger;
  * @version 0.0.2
  */
 public class Method61 extends AbstractMethod {
+    /**
+     * Define logger.
+     */
+    private static final Logger LOG = Logger.getLogger(Method61.class);
+    /**
+     * define normal weighting.
+     */
+    private static final int[] NORMAL_WEIGHTING =
+            new int[]{2, 1, 2, 1, 2, 1, 2, 1, 2};
+    /**
+     * define exceptions weighting.
+     */
+    private static final int[] EXCEPTIONS_WEIGHTING =
+            new int[]{2, 1, 0, 2, 1, 2, 1, 2, 1, 2};
+    /**
+     * define exceptions account number pos.
+     */
+    private static final int EXCEPTIONS_ACCOUNT_NUMBER_POS = 7;
+    /**
+     * define factor start pos of account number.
+     */
+    private static final int FACTOR_START_POS = 1;
+    /**
+     * define factor end pos of account number.
+     */
+    private static final int FACTOR_END_POS = 7;
+    /**
+     * define check digit pos.
+     */
+    private static final int CHECK_DIGIT_POS = 8;
+    /**
+     * define modulus 10.
+     */
+    private static final int MODULUS_10 = 10;
 
-    private Logger log = Logger.getLogger(Method61.class);
+    /**
+     * Minuend.
+     */
+    private static final int MINUEND = 10;
 
+    /**
+     * 8th pos of account number.
+     */
+    private static final int PLACE_8 = 8;
+    /**
+     * is 8.
+     */
+    private static final int IS_8 = 8;
+    /**
+     * end pos of addition.
+     */
+    private static final int END = 7;
+
+
+    /**
+     * test of method 61.
+     *
+     * @return boolean
+     */
     @Override
     public boolean test() {
-        weighting = new int[]{2, 1, 2, 1, 2, 1, 2, 1, 2};
-
         int[] number = this.expand(this.getAccountNumberArray());
-        log.debug("accountNumber: " + Arrays.toString(number));
-        if (number[8] == 8) {
-            log.debug("go in ausnahme");
-            return ausnahme(number);
+        LOG.debug("accountNumber: " + Arrays.toString(number));
+        if (number[PLACE_8] == IS_8) {
+            LOG.debug("go in exceptionsForTests");
+            return exceptionsForTests(number);
         }
-        number = factor(number, weighting, 1, 7);
-        int pz = add(number, 0, 7);
-        pz %= 10;
-        pz = 10 - pz;
-        return checkPz(pz, number, 8);
+        number = factor(
+                number,
+                NORMAL_WEIGHTING,
+                FACTOR_START_POS,
+                FACTOR_END_POS
+        );
+        int pz = add(number, 0, END);
+        pz %= MODULUS_10;
+        pz = MINUEND - pz;
+        return checkPz(pz, number, CHECK_DIGIT_POS);
     }
 
-    private boolean ausnahme(int[] number) {
-        weighting = new int[]{2, 1, 0, 2, 1, 2, 1, 2, 1, 2};
-        int tmp = number[7];
-        number = factor(number, weighting, 1, number.length);
-        int pz = add(number, 0, number.length);
-        number[7] = tmp;
-        pz %= 10;
-        pz = 10 - pz;
-        return checkPz(pz, number, 8);
+    /**
+     * exceptions calculation.
+     *
+     * @param number account number array
+     * @return boolean
+     */
+    private boolean exceptionsForTests(final int[] number) {
+        int tmp = number[EXCEPTIONS_ACCOUNT_NUMBER_POS];
+        int[] n = factor(
+                number,
+                EXCEPTIONS_WEIGHTING,
+                FACTOR_START_POS,
+                number.length
+        );
+        int pz = add(n, 0, number.length);
+        n[EXCEPTIONS_ACCOUNT_NUMBER_POS] = tmp;
+        pz %= MODULUS_10;
+        pz = MINUEND - pz;
+        return checkPz(pz, number, CHECK_DIGIT_POS);
     }
 
 }

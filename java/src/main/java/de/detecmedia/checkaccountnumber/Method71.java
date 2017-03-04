@@ -43,42 +43,80 @@ import org.apache.log4j.Logger;
  * @version 0.0.2
  */
 public class Method71 extends AbstractMethod {
+    /**
+     * define logger.
+     */
+    private static final Logger LOG = Logger.getLogger(Method71.class);
+    /**
+     * Modulus 11.
+     */
+    private static final int MODULUS_11 = 11;
+    /**
+     * Place of number.
+     */
+    private static final int PLACE = 10;
+    /**
+     * weighing.
+     */
+    private static final int[] WEIGHTING = {6, 5, 4, 3, 2, 1};
+    /**
+     * start pos.
+     */
+    private static final int START = 1;
+    /**
+     * end pos.
+     */
+    private static final int ENT = 7;
 
-    private Logger log = Logger.getLogger(Method71.class);
-
+    /**
+     * test for method 71.
+     *
+     * @return boolean
+     */
     @Override
     public boolean test() {
         int[] number = expand(this.getAccountNumberArray());
-        int[] weighting = {6, 5, 4, 3, 2, 1};
-        number = factor(number, weighting);
-        int pz = add(number, 1, 7);
+        number = factor(number, WEIGHTING);
+        int pz = add(number, START, ENT);
         pz = modulus11(pz);
         return checkPz(pz, number);
     }
 
+    /**
+     * override factor.
+     *
+     * @param number    int[] AccountNumber
+     * @param weighting weighting
+     * @return int
+     */
     @Override
-    protected int[] factor(int[] number, int[] weighting) {
+    protected int[] factor(final int[] number, final int[] weighting) {
         int numberI = 1;
-        log.debug("result factor: " + Arrays.toString(number));
+        LOG.debug("result factor: " + Arrays.toString(number));
         for (int i = 0; i < weighting.length; i++) {
             number[numberI++] *= weighting[i];
         }
-        log.debug("result factor: " + Arrays.toString(number));
+        LOG.debug("result factor: " + Arrays.toString(number));
         return number;
     }
 
+    /**
+     * Modulus 11.
+     * @param number int
+     * @return
+     */
     @Override
-    protected int modulus11(int number) {
-        number %= 11;
-        log.debug("%11 " + number);
-        if (number == 0) {
+    protected int modulus11(final int number) {
+        int n = number % MODULUS_11;
+        LOG.debug("%11 " + n);
+        if (n == 0) {
             return 0;
         }
-        number = 11 - number;
-        if (number == 10) {
+        n = MODULUS_11 - n;
+        if (n == PLACE) {
             return 1;
         }
-        return number;
+        return n;
     }
 
 }

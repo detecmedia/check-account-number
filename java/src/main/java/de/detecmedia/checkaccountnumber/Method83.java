@@ -154,8 +154,28 @@ import org.apache.log4j.Logger;
 public class Method83
         extends AbstractMethod {
 
-    private Logger log = Logger.getLogger(Method83.class);
+    /**
+     * define logger
+     */
+    private static final Logger LOG = Logger.getLogger(Method83.class);
+    /**
+     * define weighting for mehtod a.
+     */
+    private static final int[] METHOD_A_WEIGHTING = new int[]{2, 3, 4, 5, 6, 7};
+    /**
+     * define weighting for sachkonten.
+     */
+    private static final int[] METHOD_SACHKONTEN_WEIGHTING = new int[]{2, 3, 4, 5, 6, 7, 8};
+    /**
+     * define weighting for mehtod b.
+     */
+    private static final int[] METHOD_B_WEIGHTING = new int[]{2, 3, 4, 5, 6};
 
+    /**
+     * Teest method 83
+     *
+     * @return boolean
+     */
     @Override
     public boolean test() {
         int[] number = this.getAccountNumberArray();
@@ -204,18 +224,16 @@ public class Method83
      * @return
      */
     boolean methodA(int[] number) {
-        weighting = new int[]{2, 3, 4, 5, 6, 7};
+
         Method32 method32 = new Method32();
         method32.setAccountNumberArray(number.clone());
-        if(method32.check(weighting)) {
-            return true;
-        }
-        return methodASachkonten(number.clone());
+        return method32.check(METHOD_A_WEIGHTING) ||
+                methodASachkonten(number.clone());
     }
     
     boolean methodASachkonten(int[] number) {
-        weighting = new int[]{2, 3, 4, 5, 6, 7, 8};
-        number = factor(number, weighting, 3, 9);
+
+        number = factor(number, METHOD_SACHKONTEN_WEIGHTING, 3, 9);
         int pz = add(number,2,9);
         pz = modulus11(pz);
         return checkPz(pz, number);
@@ -247,14 +265,13 @@ public class Method83
      * vorzunehmen.</p>
      *
      * @see Method33
-     * @param number
-     * @return
+     * @param number account number array
+     * @return boolean
      */
     boolean methodB(int[] number) {
-        weighting = new int[]{2, 3, 4, 5, 6};
         Method33 method33 = new Method33();
         method33.setAccountNumberArray(number);
-        return method33.check(weighting);
+        return method33.check(METHOD_B_WEIGHTING);
     }
 
     /**
@@ -329,13 +346,13 @@ public class Method83
         // reset number
         number = tmp.clone();
         if (number[2] == 9 && number[3] == 9) {
-            log.debug("ausname");
-            log.debug("number : " + Arrays.toString(number));
+            LOG.debug("ausname");
+            LOG.debug("number : " + Arrays.toString(number));
             weighting = new int[]{2, 3, 4, 5, 6, 7, 8};
             Method02 method02 = new Method02();
             method02.setAccountNumberArray(number);
             number = method02.factor(number, weighting, 3, 9);
-            log.debug("number : " + Arrays.toString(number));
+            LOG.debug("number : " + Arrays.toString(number));
             pz = method02.add(number, 2, 9);
             pz = method02.modulus11(pz);
             return checkPz(pz, number);
@@ -343,23 +360,29 @@ public class Method83
         return false;
 
     }
-    
-    @Override
-    protected int modulus11(int number) {
-        int checkDigit;
-        number %= 11;
 
-        log.debug("%11: " + number);
-        if (number == 0) {
-            log.debug("pz 0: " + number);
+    /**
+     * override modulus 11
+     *
+     * @param number int
+     * @return
+     */
+    @Override
+    protected int modulus11(final int number) {
+        int checkDigit;
+        int n = number % 11;
+
+        LOG.debug("%11: " + n);
+        if (n == 0) {
+            LOG.debug("pz 0: " + n);
             return 0;
         }
-        if (number == 10) {
-            log.debug("InvalidException");
+        if (n == 10) {
+            LOG.debug("InvalidException");
             throw new InvalidAcountNumberException();
         }
-        checkDigit = 11 - number;
-        log.debug("pz all: " + checkDigit);
+        checkDigit = 11 - n;
+        LOG.debug("pz all: " + checkDigit);
         return checkDigit;
     }
     
@@ -372,16 +395,16 @@ public class Method83
      */
     @Override
     protected int add(int[] number, int start, int end) {
-        log.debug(start + " to " + end);
+        LOG.debug(start + " to " + end);
         int pz = 0;
         for (int i = start--; i < end; i++) {
 
             int o = number[i];
-          
-            log.debug("+" + o);
+
+            LOG.debug("+" + o);
             pz += o;
         }
-        log.debug("after add: " + pz);
+        LOG.debug("after add: " + pz);
         return pz;
     }
 
