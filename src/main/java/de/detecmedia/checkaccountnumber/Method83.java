@@ -392,13 +392,13 @@ public class Method83
      * @param number
      * @param start
      * @param end
-     * @return
+     * @return boolean
      */
     @Override
-    protected int add(int[] number, int start, int end) {
+    protected int add(final int[] number, final int start, final int end) {
         LOG.debug(start + " to " + end);
         int pz = 0;
-        for (int i = start--; i < end; i++) {
+        for (int i = start; i < end; i++) {
 
             int o = number[i];
 
