@@ -11,6 +11,18 @@ import org.apache.log4j.Logger;
  */
 public abstract class AbstractMethod implements CheckAccountNumber {
 
+    ;
+
+
+    protected static final int ACCOUNT_NUMBER_IS_7 = 7;
+    protected static final int ACCOUNT_NUMBER_IS_8 = 8;
+    protected static final int ACCOUNT_NUMBER_IS_9 = 9;
+    protected static final int ACCOUNT_NUMBER_PLACE_9 = 9;
+    protected static final int ACCOUNT_NUMBER_LEGHT_10 = 10;
+
+    protected static final int MODULUS_10 = 10;
+    protected static final int MODULUS_11 = 11;
+
     private int[] accountNumberArray;
     /**
      * Logger for this classe

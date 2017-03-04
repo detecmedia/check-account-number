@@ -174,6 +174,24 @@ public class Method83
     private static final int[] METHOD_B_WEIGHTING = new int[]{2, 3, 4, 5, 6};
 
     /**
+     * Minuent of check digit.
+     */
+    private static final int MINUEND_CHECK_DIGIT = 11;
+    /**
+     * is result 10.
+     */
+    private static final int RESULT_IS_10 = 10;
+
+    /**
+     * start factor = 3.
+     */
+    private static final int FACTOR_START = 3;
+    /**
+     * end factor = 9
+     */
+    private static final int FACTOR_END = 9;
+
+    /**
      * Teest method 83
      *
      * @return boolean
@@ -222,11 +240,11 @@ public class Method83
      * Testkontonummern: 0001156071, 0001156136</p>
      * <p>
      *
-     * @param number
-     * @return
+     * @param number account number array
+     * @return boolean
      * @see Method32
      */
-    boolean methodA(int[] number) {
+    boolean methodA(final int[] number) {
 
         Method32 method32 = new Method32();
         method32.setAccountNumberArray(number.clone());
@@ -234,12 +252,19 @@ public class Method83
                 methodASachkonten(number.clone());
     }
 
-    boolean methodASachkonten(int[] number) {
 
-        number = factor(number, METHOD_SACHKONTEN_WEIGHTING, 3, 9);
-        int pz = add(number, 2, 9);
+    /**
+     * calculate sachkonten.
+     *
+     * @param number account number array
+     * @return boolean
+     */
+    boolean methodASachkonten(final int[] number) {
+
+        int[] n = factor(number, METHOD_SACHKONTEN_WEIGHTING, FACTOR_START, FACTOR_END);
+        int pz = add(n, 2, 9);
         pz = modulus11(pz);
-        return checkPz(pz, number);
+        return checkPz(pz, n);
     }
 
     /**
@@ -276,6 +301,15 @@ public class Method83
         method33.setAccountNumberArray(number);
         return method33.check(METHOD_B_WEIGHTING);
     }
+
+    private static final int[] WEIGHTING_A = new int[]{2, 3, 4, 5, 6};
+    private static final int[] WEIGHTING_B = new int[]{2, 3, 4, 5, 6, 7, 8};
+    private static final int METHOD_C_FACTOR_STRT = 5;
+    private static final int ADD_START = 2;
+    private static final int METHOD_C_ADD_START = 4;
+    private static final int ADD_END = 9;
+
+
 
     /**
      * <b>Methode C. </b></p>
@@ -326,48 +360,48 @@ public class Method83
      * @see Method02
      * </p>
      */
-    boolean methodC(int[] number) {
-        int[] tmp = number.clone();
-        if (number[9] == 7
-                || number[9] == 8
-                || number[9] == 7) {
+    boolean methodC(final int[] number) {
+        int[] n = number.clone();
+        if (n[ACCOUNT_NUMBER_PLACE_10th] == ACCOUNT_NUMBER_IS_7
+                || n[ACCOUNT_NUMBER_PLACE_10th] == ACCOUNT_NUMBER_IS_8
+                ) {
             throw new InvalidAcountNumberException();
         }
-        weighting = new int[]{2, 3, 4, 5, 6};
+
         Method33 method33 = new Method33();
-        if (number.length != 10) {
+        if (n.length != ACCOUNT_NUMBER_LEGHT_10) {
             throw new AccountNumberLenghtException();
         }
-        number = method33.factor(number, weighting, 5, 9);
-        int pz = method33.add(number, 4, 9);
+        n = method33.factor(n, WEIGHTING_A, METHOD_C_FACTOR_STRT, FACTOR_END);
+        int pz = method33.add(n, METHOD_C_ADD_START, ADD_END);
         pz = modulus7(pz);
-        if (method33.checkPz(pz, number)) {
+        if (method33.checkPz(pz, n)) {
             return true;
         }
 
         // reset number
-        number = tmp.clone();
-        if (number[2] == 9 && number[3] == 9) {
+        n = number;
+        if (n[2] == ACCOUNT_NUMBER_IS_9 && n[3] == ACCOUNT_NUMBER_IS_9) {
             LOG.debug("ausname");
-            LOG.debug("number : " + Arrays.toString(number));
-            weighting = new int[]{2, 3, 4, 5, 6, 7, 8};
+            LOG.debug("number : " + Arrays.toString(n));
+
             Method02 method02 = new Method02();
-            method02.setAccountNumberArray(number);
-            number = method02.factor(number, weighting, 3, 9);
-            LOG.debug("number : " + Arrays.toString(number));
-            pz = method02.add(number, 2, 9);
+            method02.setAccountNumberArray(n);
+            n = method02.factor(n, WEIGHTING_B, FACTOR_START, FACTOR_END);
+            LOG.debug("number : " + Arrays.toString(n));
+            pz = method02.add(n, ADD_START, ADD_END);
             pz = method02.modulus11(pz);
-            return checkPz(pz, number);
+            return checkPz(pz, n);
         }
         return false;
-
     }
 
+
     /**
-     * override modulus 11
+     * override modulus 11.
      *
      * @param number int
-     * @return
+     * @return boolean
      */
     @Override
     protected int modulus11(final int number) {
@@ -379,19 +413,21 @@ public class Method83
             LOG.debug("pz 0: " + n);
             return 0;
         }
-        if (n == 10) {
+        if (n == RESULT_IS_10) {
             LOG.debug("InvalidException");
             throw new InvalidAcountNumberException();
         }
-        checkDigit = 11 - n;
+        checkDigit = MINUEND_CHECK_DIGIT - n;
         LOG.debug("pz all: " + checkDigit);
         return checkDigit;
     }
 
     /**
-     * @param number
-     * @param start
-     * @param end
+     * addition of accout number.
+     *
+     * @param number account number array
+     * @param start  start pos
+     * @param end    end pos
      * @return boolean
      */
     @Override

@@ -8,7 +8,7 @@ package de.detecmedia.checkaccountnumber;
 /**
  * @author Markus Potthast
  */
-public interface CheckAccountNumber {
+public interface CheckAccountNumber extends AccountNumberPlace, Weighting {
 
     void setAccountNumber(String accountNumber);
 
