@@ -222,6 +222,14 @@ public abstract class AbstractMethod implements CheckAccountNumber {
         return this.checkPz(pz, number, number.length);
     }
 
+    /**
+     * check checkdigit in account number.
+     *
+     * @param pz     int checkdigit
+     * @param number int[] account number
+     * @param pos    int pos of account number
+     * @return true|false after check
+     */
     protected boolean checkPz(int pz, int[] number, int pos) {
         log.debug("Number: " + Arrays.toString(number));
         log.debug("pz to number " + pos + " = " + pz + " to " + number[pos - 1]);
@@ -235,6 +243,14 @@ public abstract class AbstractMethod implements CheckAccountNumber {
         return add(number, 0, number.length - 1);
     }
 
+    /**
+     * Addition from numbers
+     *
+     * @param number account number array
+     * @param start  start pos
+     * @param end    end pos
+     * @return
+     */
     protected int add(int[] number, int start, int end) {
         log.debug(start + " to " + end);
         int pz = 0;
