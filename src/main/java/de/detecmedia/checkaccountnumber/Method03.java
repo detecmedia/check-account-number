@@ -17,6 +17,8 @@ import org.apache.log4j.Logger;
  */
 public class Method03 extends Method01 {
 
+    private int[] weighting;
+
     /**
      * Logger for this Class
      */

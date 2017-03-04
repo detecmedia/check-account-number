@@ -96,21 +96,38 @@ import org.apache.log4j.Logger;
  * @version 0.0.2
  */
 public class Method24 extends AbstractMethod {
+    /**
+     * weighting.
+     */
+    private int[] weighting;
+    /**
+     * deefine logger.
+     */
+    private Logger log = Logger.getLogger(Method24.class);
 
-    public Logger log = Logger.getLogger(Method24.class);
-
+    /**
+     * test for method 24.
+     *
+     * @return boolean
+     */
     @Override
     public boolean test() {
-        if (this.getAccountNumberArray().length != 10) {
+        if (this.getAccountNumberArray().length != ACCOUNT_NUMBER_LEGHT_10) {
             throw new AccountNumberLenghtException();
         }
         int[] number = this.getAccountNumberArray();
         weighting = new int[]{1, 2, 3, 1, 2, 3, 1, 2, 3};
         number = this.factor(number, weighting);
-        int pz = this.add(number, weighting) % 10;
+        int pz = this.add(number, weighting) % MODULUS_10;
         return this.checkPz(pz, number);
     }
 
+    /**
+     *
+     * @param number    int[] AccountNumber
+     * @param weighting weighting
+     * @return int array
+     */
     @Override
     protected int[] factor(int[] number, int[] weighting) {
         log.debug("Number: " + Arrays.toString(number));

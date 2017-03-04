@@ -29,6 +29,8 @@ package de.detecmedia.checkaccountnumber;
 public class Method95
         extends Method06 {
 
+    private int[] weighting;
+
     @Override
     public boolean test() {
         if (this.getLong() >= 1L && this.getLong() <= 1999999L ||

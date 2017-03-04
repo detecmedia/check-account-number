@@ -18,6 +18,8 @@ import org.apache.log4j.Logger;
  */
 public class Method21 extends Method00 {
 
+    private int[] weighting;
+
     public Logger log = Logger.getLogger(Method21.class);
 
     @Override

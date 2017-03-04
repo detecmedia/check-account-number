@@ -20,6 +20,7 @@ package de.detecmedia.checkaccountnumber;
  * @version 0.0.2
  */
 public class Method94 extends Method00 {
+    private int[] weighting;
 
     @Override
     public boolean test() {

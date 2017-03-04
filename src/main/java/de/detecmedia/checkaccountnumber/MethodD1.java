@@ -74,6 +74,8 @@ import org.apache.log4j.Logger;
 public class MethodD1
         extends AbstractMethod {
 
+    private int[] weighting;
+
     private int[] accountNumberArray;
 
     private final Logger log = Logger.getLogger(MethodD1.class);
@@ -98,7 +100,7 @@ public class MethodD1
         log.debug("number " + Arrays.toString(number));
         number = expand(number);
         String firstStr = String.valueOf(constante[number[0]]);
-        this.setAccountNumber(firstStr.concat(this.accountNumber.substring(1)));
+        this.setAccountNumber(firstStr.concat(this.getAccountNumber().substring(1)));
 
         log.debug("new accountnumner: " + Arrays.toString(this.getAccountNumberArray()));
         weighting = new int[]{2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2};
@@ -117,12 +119,12 @@ public class MethodD1
     @Override
     protected int[] getAccountNumberArray() {
 
-        int lengthOfAccountNumber = accountNumber.length();
+        int lengthOfAccountNumber = getAccountNumber().length();
         int[] value = new int[lengthOfAccountNumber];
         log.debug("length of accountNumber: " + lengthOfAccountNumber);
         for (int i = 0; i < value.length; i++) {
-            log.debug("Char at Pos " + i + " is " + accountNumber.charAt(i));
-            value[i] = accountNumber.charAt(i) - '0';
+            log.debug("Char at Pos " + i + " is " + getAccountNumber().charAt(i));
+            value[i] = getAccountNumber().charAt(i) - '0';
         }
         this.accountNumberArray = value;
 

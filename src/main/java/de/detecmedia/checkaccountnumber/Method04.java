@@ -19,6 +19,8 @@ public class Method04 extends Method02 {
 
     private static Logger log = Logger.getLogger("de.detecmedia.ceckaccountnumber.Methode04");
 
+    private int[] weighting;
+
     @Override
     public boolean test() {
 

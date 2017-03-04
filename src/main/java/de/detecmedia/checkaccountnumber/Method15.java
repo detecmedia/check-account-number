@@ -24,10 +24,12 @@ public class Method15 extends Method06 {
 
     private static Logger log = Logger.getLogger(Method15.class);
 
+    private int[] weighting;
+
     @Override
     public boolean test() {
         weighting = new int[]{2, 3, 4, 5};
-        if (this.accountNumber.length() != 10) {
+        if (this.getAccountNumber().length() != 10) {
             throw new AccountNumberLenghtException();
         }
         return this.check(weighting);

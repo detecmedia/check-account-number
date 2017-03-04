@@ -26,6 +26,9 @@ public class Method13 extends Method00 {
 
     private Logger log = Logger.getLogger(Method13.class);
 
+
+    private int[] weighting;
+
     @Override
     public boolean test() {
 

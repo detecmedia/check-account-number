@@ -76,6 +76,8 @@ import org.apache.log4j.Logger;
 public class Method84 extends Method51 {
 
     private Logger log = Logger.getLogger(Method84.class);
+    private int[] weighting;
+
 
     @Override
     public boolean test() {

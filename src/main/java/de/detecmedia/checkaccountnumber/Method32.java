@@ -27,6 +27,7 @@ public class Method32 extends Method06 {
 
     private final Logger log = Logger.getLogger(Method32.class);
 
+    private int[] weighting;
     @Override
     public boolean test() {
         int[] number = this.getAccountNumberArray();

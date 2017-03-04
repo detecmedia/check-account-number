@@ -58,6 +58,8 @@ import de.detecmedia.checkaccountnumber.exception.InvalidException;
 public class Method93
         extends Method06 {
 
+    private int[] weighting;
+
     public static final int MODULUS11 = 1;
     public static final int MODULUS7 = 2;
 

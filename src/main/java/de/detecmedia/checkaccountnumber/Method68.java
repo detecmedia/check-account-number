@@ -72,6 +72,8 @@ import org.apache.log4j.Logger;
  */
 public class Method68 extends Method00 {
 
+    private int[] weighting;
+
     /**
      * Number length.
      */

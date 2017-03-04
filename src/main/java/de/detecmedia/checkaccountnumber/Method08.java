@@ -17,7 +17,7 @@ public class Method08 extends Method00 {
 
     @Override
     public boolean test() {
-        if (Integer.valueOf(accountNumber).intValue() < 60000) {
+        if (Integer.valueOf(getAccountNumber()).intValue() < 60000) {
             log.debug("accountnumber < 60000");
             return false;
         }

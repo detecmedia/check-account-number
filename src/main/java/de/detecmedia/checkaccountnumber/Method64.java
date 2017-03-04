@@ -25,6 +25,8 @@ public class Method64 extends Method06 {
 
     private Logger log = Logger.getLogger(Method64.class);
 
+    private int[] weighting;
+
     @Override
     public boolean test() {
         weighting = new int[]{9, 10, 5, 8, 4, 2};

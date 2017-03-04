@@ -54,6 +54,8 @@ public class MethodE1
 
     private int[] ascii = {48, 49, 50, 51, 52, 53, 54, 55, 56, 57};
 
+    private int[] weighting;
+
     @Override
     public boolean test() {
         int[] number = expand(this.getAccountNumberArray());

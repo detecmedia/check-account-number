@@ -25,6 +25,8 @@ public class Method06 extends AbstractMethod {
 
     private static Logger log = Logger.getLogger(Method06.class);
 
+    private int[] weighting;
+
     @Override
     public boolean test() {
         weighting = new int[]{2, 3, 4, 5, 6, 7, 2, 3, 4, 5, 6, 7};
@@ -71,7 +73,7 @@ public class Method06 extends AbstractMethod {
     protected int add(int[] number, int start, int end) {
         log.debug(start + " to " + end);
         int pz = 0;
-        for (int i = start--; i < end; i++) {
+        for (int i = start; i < end; i++) {
             log.debug("+" + number[i]);
             int o = number[i];
             pz += o;

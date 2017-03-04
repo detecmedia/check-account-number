@@ -22,7 +22,7 @@ import de.detecmedia.checkaccountnumber.exception.AccountNumberLenghtException;
  * @see Method06
  */
 public class Method33 extends Method06 {
-
+    private int[] weighting;
     @Override
     public boolean test() {
 

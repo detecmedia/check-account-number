@@ -26,6 +26,8 @@ public class Method26 extends Method06 {
 
     public Logger log = Logger.getLogger(Method26.class);
 
+    private int[] weighting;
+
     @Override
     public boolean test() {
         int[] number = this.getAccountNumberArray();

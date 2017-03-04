@@ -29,8 +29,8 @@ package de.detecmedia.checkaccountnumber;
  * @author Markus Potthast
  * @version 0.0.2
  */
-public class Method81
-        extends Method32 {
+public class Method81 extends Method32 {
+    private int[] weighting;
 
     @Override
     public boolean test() {

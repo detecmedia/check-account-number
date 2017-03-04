@@ -17,6 +17,8 @@ import de.detecmedia.checkaccountnumber.*;
  */
 public class Method55 extends Method06 {
 
+    private int[] weighting;
+
     @Override
     public boolean test() {
         weighting = new int[]{2, 3, 4, 5, 6, 7, 8, 7, 8};

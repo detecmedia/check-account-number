@@ -40,8 +40,9 @@ package de.detecmedia.checkaccountnumber;
  * @author Markus Potthast
  * @version 0.0.2
  */
-public class MethodD9
-        extends AbstractMethod {
+public class MethodD9 extends AbstractMethod {
+
+    private int[] weighting;
 
     @Override
     public boolean test() {

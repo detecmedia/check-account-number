@@ -23,6 +23,8 @@ package de.detecmedia.checkaccountnumber;
  */
 public class Method40 extends Method06 {
 
+    private int[] weighting;
+
     @Override
     public boolean test() {
         int A = 10;

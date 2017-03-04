@@ -107,6 +107,7 @@ package de.detecmedia.checkaccountnumber;
 public class MethodC5
         extends AbstractMethod {
 
+    private int[] weighting;
     @Override
     public boolean test() {
         int[] number = this.getAccountNumberArray();

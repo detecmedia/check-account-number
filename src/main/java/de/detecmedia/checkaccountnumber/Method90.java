@@ -179,6 +179,8 @@ import org.apache.log4j.Logger;
  */
 public class Method90 extends AbstractMethod {
 
+    private int[] weighting;
+
     private final Logger log = Logger.getLogger(Method90.class);
 
     @Override

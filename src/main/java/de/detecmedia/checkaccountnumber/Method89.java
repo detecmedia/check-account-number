@@ -36,6 +36,7 @@ import de.detecmedia.checkaccountnumber.exception.AccountNumberLenghtException;
  */
 public class Method89
         extends AbstractMethod {
+    private int[] weighting;
 
     @Override
     public boolean test() {

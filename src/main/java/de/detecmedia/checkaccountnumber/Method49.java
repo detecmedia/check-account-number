@@ -20,16 +20,17 @@ import de.detecmedia.checkaccountnumber.*;
  */
 public class Method49 extends AbstractMethod {
 
+
     @Override
     public boolean test() {
         Method00 method00 = new Method00();
-        method00.setAccountNumber(accountNumber);
+        method00.setAccountNumber(this.getAccountNumber());
         boolean check = method00.test();
         if (check) {
             return true;
         }
         Method01 method01 = new Method01();
-        method01.setAccountNumber(accountNumber);
+        method01.setAccountNumber(this.getAccountNumber());
         return method01.test();
     }
 

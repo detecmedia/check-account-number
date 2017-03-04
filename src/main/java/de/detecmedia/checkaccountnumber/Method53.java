@@ -66,6 +66,7 @@ public class Method53 extends Method52 {
     private final Logger log = Logger.getLogger(Method53.class);
 
 
+    private int[] weighting;
     @Override
     public boolean test() {
         weighting = new int[]{2, 4, 8, 5, 10, 9, 7, 3, 6, 1, 2, 4};

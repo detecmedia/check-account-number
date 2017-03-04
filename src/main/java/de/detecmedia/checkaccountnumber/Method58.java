@@ -38,6 +38,8 @@ import de.detecmedia.checkaccountnumber.exception.AccountNumberLenghtException;
  */
 public class Method58 extends Method02 {
 
+    private int[] weighting;
+
     @Override
     public boolean test() {
         if (this.getAccountNumberArray().length < 6) {

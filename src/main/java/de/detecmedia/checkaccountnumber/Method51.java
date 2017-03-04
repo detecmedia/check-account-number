@@ -123,6 +123,8 @@ public class Method51 extends AbstractMethod {
 
     private static final Logger log = Logger.getLogger(Method51.class);
 
+    private int[] weighting;
+
     @Override
     public boolean test() {
         int[] number = expand(this.getAccountNumberArray());

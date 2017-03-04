@@ -20,6 +20,7 @@ import de.detecmedia.checkaccountnumber.*;
  */
 public class Method44 extends Method33 {
 
+    private int[] weighting;
     @Override
     public boolean test() {
         int A = 10;

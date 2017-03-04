@@ -29,9 +29,13 @@ package de.detecmedia.checkaccountnumber;
  */
 public class Method23 extends Method16 {
 
+    private int[] weighting;
+
     @Override
     public boolean test() {
         weighting = new int[]{2, 3, 4, 5, 6, 7};
+
+
         int[] number = this.factor(this.getAccountNumberArray(), weighting, 1, 6);
         int pz = add(number, 0, 6);
         pz = pz % 11;

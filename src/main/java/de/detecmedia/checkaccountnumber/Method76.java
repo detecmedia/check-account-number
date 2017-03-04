@@ -82,6 +82,8 @@ public class Method76
 
     private Logger log = Logger.getLogger(Method76.class);
 
+    private int[] weighting;
+
     @Override
     public boolean test() {
 

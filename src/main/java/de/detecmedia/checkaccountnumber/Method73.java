@@ -64,6 +64,7 @@ package de.detecmedia.checkaccountnumber;
  */
 public class Method73
         extends AbstractMethod {
+    private int[] weighting;
 
     @Override
     public boolean test() {

@@ -168,7 +168,7 @@ public class Method52 extends AbstractMethod {
      */
     protected boolean checkMethod20() {
         Method20 method20 = new Method20();
-        method20.setAccountNumber(accountNumber);
+        method20.setAccountNumber(this.getAccountNumber());
         return method20.test();
     }
 

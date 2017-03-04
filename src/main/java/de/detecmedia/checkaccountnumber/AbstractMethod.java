@@ -10,39 +10,35 @@ import org.apache.log4j.Logger;
  * @author Markus Potthast
  */
 public abstract class AbstractMethod implements CheckAccountNumber {
-
-    ;
-
-
-    protected static final int ACCOUNT_NUMBER_IS_7 = 7;
-    protected static final int ACCOUNT_NUMBER_IS_8 = 8;
-    protected static final int ACCOUNT_NUMBER_IS_9 = 9;
-    protected static final int ACCOUNT_NUMBER_PLACE_9 = 9;
-    protected static final int ACCOUNT_NUMBER_LEGHT_10 = 10;
-
-    protected static final int MODULUS_10 = 10;
-    protected static final int MODULUS_11 = 11;
-
+    /**
+     * account number array
+     */
     private int[] accountNumberArray;
     /**
      * Logger for this classe
      */
     private final Logger log = Logger.getLogger(AbstractMethod.class);
     /**
-     * weighting
+     * weighting,
      */
-    protected int[] weighting;
+    private int[] weighting;
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
     /**
      * AccountNumber
      */
-    protected String accountNumber;
+    private String accountNumber;
 
     /**
-     * @param accountNumber AccountNumber
+     * @param accountnumber AccountNumber
      */
     @Override
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
+    public void setAccountNumber(final String accountnumber) {
+
+        this.accountNumber = accountnumber;
     }
 
     /**
@@ -64,8 +60,14 @@ public abstract class AbstractMethod implements CheckAccountNumber {
         return this.accountNumberArray;
     }
 
-    public void setAccountNumberArray(int[] accountNumberArray) {
-        this.accountNumberArray = accountNumberArray;
+    /**
+     * set account number from int[]
+     *
+     * @param accountnumberarray account number
+     */
+    public void setAccountNumberArray(final int[] accountnumberarray) {
+
+        this.accountNumberArray = accountnumberarray;
     }
 
     /**
@@ -80,6 +82,12 @@ public abstract class AbstractMethod implements CheckAccountNumber {
         return Integer.parseInt(accountNumber.trim());
     }
 
+    /**
+     * get account number as long
+     *
+     * @return long account number
+     * @throws NumberFormatException
+     */
     public long getLong() throws NumberFormatException {
         log.debug("set Accountnumber is: " + accountNumber);
         if (accountNumber == null) {
@@ -146,6 +154,13 @@ public abstract class AbstractMethod implements CheckAccountNumber {
         //return number;
     }
 
+    /**
+     * @param number
+     * @param weighting
+     * @param start     start calculate from account number position
+     * @param end       end calculate by account number position
+     * @return
+     */
     protected int[] factor(int[] number, int[] weighting, int start, int end) {
 
         start--;
@@ -340,4 +355,11 @@ public abstract class AbstractMethod implements CheckAccountNumber {
         return 7 - number;
     }
 
+    public int[] getWeighting() {
+        return weighting;
+    }
+
+    public void setWeighting(int[] weighting) {
+        this.weighting = weighting;
+    }
 }

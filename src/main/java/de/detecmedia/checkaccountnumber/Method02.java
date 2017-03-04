@@ -26,6 +26,8 @@ public class Method02 extends AbstractMethod {
 
     private static Logger log = Logger.getLogger(Method02.class);
 
+    private int[] weighting;
+
     @Override
     public boolean test() {
         weighting = new int[]{2, 3, 4, 5, 6, 7, 8, 9, 2};

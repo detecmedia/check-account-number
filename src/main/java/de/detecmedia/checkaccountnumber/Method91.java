@@ -88,6 +88,8 @@ public class Method91 extends Method06 {
 
     private final Logger log = Logger.getLogger(Method91.class);
 
+    private int[] weighting;
+
     @Override
     public boolean test() {
         int[] number = this.getAccountNumberArray();

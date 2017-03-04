@@ -55,6 +55,8 @@ import org.apache.log4j.Logger;
 public class MethodD4
         extends AbstractMethod {
 
+    private int[] weighting;
+
     private Logger log = Logger.getLogger(MethodD4.class);
 
     @Override

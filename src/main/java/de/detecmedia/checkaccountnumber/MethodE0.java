@@ -41,6 +41,7 @@ import org.apache.log4j.Logger;
 public class MethodE0
         extends AbstractMethod {
     private final Logger log = Logger.getLogger(MethodE0.class);
+    private int[] weighting;
 
     @Override
     public boolean test() {

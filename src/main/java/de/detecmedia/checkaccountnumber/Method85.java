@@ -82,6 +82,8 @@ public class Method85
 
     private Logger log = Logger.getLogger(Method85.class);
 
+    private int[] weighting;
+
     @Override
     public boolean test() {
         int[] numnber = this.getAccountNumberArray();
@@ -128,7 +130,7 @@ public class Method85
     boolean methodA(int[] number) {
         weighting = new int[]{2, 3, 4, 5, 6, 7};
         Method06 method06 = new Method06();
-        method06.setAccountNumber(accountNumber);
+        method06.setAccountNumber(getAccountNumber());
         number = method06.factor(number, weighting);
         int pz = method06.add(number);
         pz = method06.modulus11(pz);

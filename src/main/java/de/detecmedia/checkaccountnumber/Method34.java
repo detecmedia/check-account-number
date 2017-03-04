@@ -19,6 +19,8 @@ public class Method34 extends Method28 {
 
     public Logger log = Logger.getLogger(Method34.class);
 
+    private int[] weighting;
+
     @Override
     public boolean test() {
         int A = 10;

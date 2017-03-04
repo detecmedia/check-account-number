@@ -93,6 +93,8 @@ import org.apache.log4j.Logger;
 public class Method57
         extends AbstractMethod {
 
+    private int[] weighting;
+
     private static Logger log = Logger.getLogger(Method57.class);
 
     @Override
@@ -208,7 +210,7 @@ public class Method57
 
         Method00 method00 = new Method00();
         method00.setAccountNumberArray(number);
-        log.debug("accountNumber is: " + accountNumber);
+        log.debug("accountNumber is: " + getAccountNumber());
 
         return method00.check(weighting);
     }

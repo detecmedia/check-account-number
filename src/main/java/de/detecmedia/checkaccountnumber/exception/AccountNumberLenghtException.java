@@ -10,7 +10,9 @@ package de.detecmedia.checkaccountnumber.exception;
  * @author Markus Potthast
  */
 public class AccountNumberLenghtException extends InvalidAcountNumberException {
-
+    /**
+     * Exception for account number to short.
+     */
     public AccountNumberLenghtException() {
         super("AccountNumber to short");
     }

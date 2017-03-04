@@ -43,6 +43,8 @@ public class Method25 extends AbstractMethod {
 
     private final Logger log = Logger.getLogger(Method25.class);
 
+    private int[] weighting;
+
     @Override
     public boolean test() {
         int[] number = this.getAccountNumberArray();

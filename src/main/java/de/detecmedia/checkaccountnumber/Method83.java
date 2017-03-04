@@ -8,95 +8,49 @@ import java.util.Arrays;
 import org.apache.log4j.Logger;
 
 /**
- * Kennzeichen 83.
- * <p>
- * 1. Kundenkonten</p>
- * <p>
- * A. Modulus 11, Gewichtung 2, 3, 4, 5, 6, 7<br>
- * B. Modulus 11, Gewichtung 2, 3, 4, 5, 6 <br>
- * C. Modulus 7, Gewichtung 2, 3, 4, 5, 6</p>
- * <p>
- * Gemeinsame Anmerkungen für die Berechnungsverfahren</p>
- * <p>
- * Die Kontonummer ist immer 10-stellig. Die für die Berechnung relevante
- * Kundennummer (K) befindet sich bei der Methode A in den Stellen4 bis 9 der
- * Kontonummer und bei den Methoden B + C in den Stellen 5 - 9, die Prüfziffer
- * in Stelle 10 der Kontonummer.</p>
- * <p>
- * Ergibt die erste Berechnung der Prüfziffer nach dem Verfahren A einen
- * Prüfzifferfehler, so sind weitere Berechnungen mit den anderen Methoden
- * vorzunehmen. Kontonummern, die nach Durchführung aller 3 Berechnungsmethoden
- * nicht zu einem richtigen Ergebnis führen, sind nicht prüfbar.</p>
- * <p>
- * <b>Methode A:</b></p>
- * <p>
- * Modulus 11, Gewichtung 2, 3, 4, 5, 6, 7</p>
- * <p>
- * Die Berechnung und möglichen Ergebnisse entsprechen dem Verfahren 32.</p>
+ * Kennzeichen 83. <p> 1. Kundenkonten</p> <p> A. Modulus 11, Gewichtung 2, 3,
+ * 4, 5, 6, 7<br> B. Modulus 11, Gewichtung 2, 3, 4, 5, 6 <br> C. Modulus 7,
+ * Gewichtung 2, 3, 4, 5, 6</p> <p> Gemeinsame Anmerkungen für die
+ * Berechnungsverfahren</p> <p> Die Kontonummer ist immer 10-stellig. Die für
+ * die Berechnung relevante Kundennummer (K) befindet sich bei der Methode A in
+ * den Stellen4 bis 9 der Kontonummer und bei den Methoden B + C in den Stellen
+ * 5 - 9, die Prüfziffer in Stelle 10 der Kontonummer.</p> <p> Ergibt die erste
+ * Berechnung der Prüfziffer nach dem Verfahren A einen Prüfzifferfehler, so
+ * sind weitere Berechnungen mit den anderen Methoden vorzunehmen. Kontonummern,
+ * die nach Durchführung aller 3 Berechnungsmethoden nicht zu einem richtigen
+ * Ergebnis führen, sind nicht prüfbar.</p> <p> <b>Methode A:</b></p> <p>
+ * Modulus 11, Gewichtung 2, 3, 4, 5, 6, 7</p> <p> Die Berechnung und möglichen
+ * Ergebnisse entsprechen dem Verfahren 32.</p>
  * <pre>
  * Stellennr.: 1 2 3 4 5 6 7 8 9 A (A=10)
  * Kontonr.:   x x x K K K K K K P
  * Gewichtung:       7 6 5 4 3 2
  * </pre>
- * <p>
- * Testkontonummern: 0001156071, 0001156136</p>
- * <p>
- * <b>Methode B:</b></p>
- * <p>
- * Modulus 11, Gewichtung 2, 3, 4, 5, 6</p>
- * <p>
- * Die Berechnung und möglichen Ergebnisse entsprechen dem Verfahren 33.</p>
- * <pre>Stellennr.: 1 2 3 4 5 6 7 8 9 A (A=10) Kontonr.: xxxxKKKKKP Gewichtung: 6 5 4 3 2</pre>
- * <p>
- * Testkontonummer: 0000156078</p>
- * <p>
- * <b>Methode C:</b></p>
- * <p>
+ * <p> Testkontonummern: 0001156071, 0001156136</p> <p> <b>Methode B:</b></p>
+ * <p> Modulus 11, Gewichtung 2, 3, 4, 5, 6</p> <p> Die Berechnung und
+ * möglichen Ergebnisse entsprechen dem Verfahren 33.</p>
+ * <pre>Stellennr.: 1 2 3 4 5 6 7 8 9 A (A=10) Kontonr.: xxxxKKKKKP Gewichtung:
+ * 6 5 4 3 2</pre>
+ * <p> Testkontonummer: 0000156078</p> <p> <b>Methode C:</b></p> <p>
  * Kontonummern, die bis zur Methode C gelangen und in der 10. Stelle eine 7, 8
- * oder 9 haben, sind ungültig.</p>
- * <p>
- * Modulus 7, Gewichtung 2, 3, 4, 5, 6</p>
- * <p>
- * Das Berechnungsverfahren entspricht Methode B.</p>
- * <p>
- * Die Summe der Produkte ist jedoch durch 7 zu dividieren. Der verbleibende
- * Rest wird vom Divisor (7) subtrahiert. Das Ergebnis ist die Prüfziffer.
- * Verbleibt kein Rest, ist die Prüfziffer 0.</p>
- * <p>
- * Testkontonummer: 0000156071</p>
- * <p>
- * <b> 2. Sachkonten</b></p>
- * <p>
- * Berechnungsmethode:
- * </p>
- * <p>
- * A. Modulus 11, Gewichtung 2, 3, 4, 5, 6, 7, 8</p>
- * <p>
- * Die Sachkontonummer ist immer 10-stellig.</p>
- * <p>
- * Die für die Berechnung relevante Sachkontenstammnummer (S) befindet sich in
- * den Stellen 3 bis 9 der Kontonummer, wobei die 3. und 4. Stelle immer jeweils
- * 9 sein müssen; die Prüfziffer ist in Stelle 10 der Sachkontonummer.</p>
- * <p>
- * Führt die Berechnung nicht zu einem richtigen Ergebnis, ist die Nummer nicht
- * prüfbar.</p>
- * <p>
- * Methode A:</p>
- * <p>
- * Modulus 11, Gewichtung 2, 3, 4, 5, 6, 7, 8</p>
- * <p>
- * Berechnung:</p>
- * <p>
- * Die einzelnen Stellen der Sachkontonummern sind von rechts nach links mit den
- * Ziffern 2, 3, 4, 5, 6, 7, 8 zu multiplizieren. Die jeweiligen Produkte werden
- * addiert.</p>
- * <p>
- * Die Summe ist durch 11 zu dividieren. Der verbleibende Rest wird vom Divisor
- * (11) subtrahiert. Das Ergebnis ist die Prüfziffer.</p>
- * <p>
- * Verbleibt nach der Division durch die 11 kein Rest, ist die Prüfziffer
- * "0".</p>
- * <p>
+ * oder 9 haben, sind ungültig.</p> <p> Modulus 7, Gewichtung 2, 3, 4, 5, 6</p>
+ * <p> Das Berechnungsverfahren entspricht Methode B.</p> <p> Die Summe der
+ * Produkte ist jedoch durch 7 zu dividieren. Der verbleibende Rest wird vom
+ * Divisor (7) subtrahiert. Das Ergebnis ist die Prüfziffer. Verbleibt kein
+ * Rest, ist die Prüfziffer 0.</p> <p> Testkontonummer: 0000156071</p> <p> <b>
+ * 2. Sachkonten</b></p> <p> Berechnungsmethode: </p> <p> A. Modulus 11,
+ * Gewichtung 2, 3, 4, 5, 6, 7, 8</p> <p> Die Sachkontonummer ist immer
+ * 10-stellig.</p> <p> Die für die Berechnung relevante Sachkontenstammnummer
+ * (S) befindet sich in den Stellen 3 bis 9 der Kontonummer, wobei die 3. und 4.
+ * Stelle immer jeweils 9 sein müssen; die Prüfziffer ist in Stelle 10 der
+ * Sachkontonummer.</p> <p> Führt die Berechnung nicht zu einem richtigen
+ * Ergebnis, ist die Nummer nicht prüfbar.</p> <p> Methode A:</p> <p> Modulus
+ * 11, Gewichtung 2, 3, 4, 5, 6, 7, 8</p> <p> Berechnung:</p> <p> Die einzelnen
+ * Stellen der Sachkontonummern sind von rechts nach links mit den Ziffern 2, 3,
+ * 4, 5, 6, 7, 8 zu multiplizieren. Die jeweiligen Produkte werden addiert.</p>
+ * <p> Die Summe ist durch 11 zu dividieren. Der verbleibende Rest wird vom
+ * Divisor (11) subtrahiert. Das Ergebnis ist die Prüfziffer.</p> <p> Verbleibt
+ * nach der Division durch die 11 kein Rest, ist die Prüfziffer "0".</p> <p>
  * Das Rechenergebnis "10" ist nicht verwendbar und muss auf eine Stelle
  * reduziert werden. Die rechte Stelle Null findet als Prüfziffer
  * Verwendung.</p>
@@ -105,94 +59,39 @@ import org.apache.log4j.Logger;
  * Kontonr.:   x x S S S S S S S P
  * Gewichtung:     8 7 6 5 4 3 2
  * </pre>
- * <p>
- * Testkontonummer: 0099100002</p>
- * <p>
- * Methode B:</p>
- * <p>
- * Modulus 11, Gewichtung 2, 3, 4, 5, 6</p>
- * <p>
- * Die Berechnung und mögliche Ergebnisse entsprechen dem Verfahren 33.</p>
- * <pre>Stellennr.: 1 2 3 4 5 6 7 8 9 A(A=10) Kontonr.: xxxxKKKKKP Gewichtung: 6 5 4 3 2</pre>
- * <p>
- * Testkontonummer: 0000156078</p>
- * <p>
- * Ergibt auch die Berechnung der Prüfziffer nach Methode B einen
- * Prüfzifferfehler, ist eine weitere Berechnung mit der Methode C
- * vorzunehmen.</p>
- * <p>
- * Methode C:</p>
- * <p>
+ * <p> Testkontonummer: 0099100002</p> <p> Methode B:</p> <p> Modulus 11,
+ * Gewichtung 2, 3, 4, 5, 6</p> <p> Die Berechnung und mögliche Ergebnisse
+ * entsprechen dem Verfahren 33.</p>
+ * <pre>Stellennr.: 1 2 3 4 5 6 7 8 9 A(A=10) Kontonr.: xxxxKKKKKP Gewichtung: 6
+ * 5 4 3 2</pre>
+ * <p> Testkontonummer: 0000156078</p> <p> Ergibt auch die Berechnung der
+ * Prüfziffer nach Methode B einen Prüfzifferfehler, ist eine weitere
+ * Berechnung mit der Methode C vorzunehmen.</p> <p> Methode C:</p> <p>
  * Kontonummern, die bis zur Methode C gelangen und in der 10. Stelle eine 7, 8
- * oder 9 haben, sind ungültig.</p>
- * <p>
- * Modulus 7, Gewichtung 2, 3, 4, 5, 6</p>
- * <p>
- * Das Berechnungsverfahren entspricht Methode B.</p>
- * <p>
- * Die Summe der Produkte ist jedoch durch 7 zu dividieren. Der verbleibende
- * Rest wird vom Divisor (7) subtrahiert. Das Ergebnis ist die Prüfziffer.
- * Verbleibt kein Rest, ist die Prüfziffer 0.</p>
- * <p>
- * Testkontonummer: 0000156071</p>
- * <p>
- * Ausnahme:</p>
- * <p>
- * Sind die 3. und 4. Stelle der Kontonummer = 99, so ist folgende
- * Prüfzifferberechnung maßgebend:</p>
- * <p>
- * Modulus: 11, Gewichtung 2, 3, 4, 5, 6, 7, 8</p>
- * <p>
- * Die für die Berechnung relevanten Stellen 3 bis 9 der Kontonummer werden von
- * rechts nach links mit den Ziffern 2, 3, 4, 5, 6, 7, 8 multipliziert. Die
- * weitere Berechnung und möglichen Ergebnisse entsprechen dem Verfahren
- * 02.</p>
- * <p>
- * Testkontonummer: 3199100002</p>
+ * oder 9 haben, sind ungültig.</p> <p> Modulus 7, Gewichtung 2, 3, 4, 5, 6</p>
+ * <p> Das Berechnungsverfahren entspricht Methode B.</p> <p> Die Summe der
+ * Produkte ist jedoch durch 7 zu dividieren. Der verbleibende Rest wird vom
+ * Divisor (7) subtrahiert. Das Ergebnis ist die Prüfziffer. Verbleibt kein
+ * Rest, ist die Prüfziffer 0.</p> <p> Testkontonummer: 0000156071</p> <p>
+ * Ausnahme:</p> <p> Sind die 3. und 4. Stelle der Kontonummer = 99, so ist
+ * folgende Prüfzifferberechnung maßgebend:</p> <p> Modulus: 11, Gewichtung 2,
+ * 3, 4, 5, 6, 7, 8</p> <p> Die für die Berechnung relevanten Stellen 3 bis 9
+ * der Kontonummer werden von rechts nach links mit den Ziffern 2, 3, 4, 5, 6,
+ * 7, 8 multipliziert. Die weitere Berechnung und möglichen Ergebnisse
+ * entsprechen dem Verfahren 02.</p> <p> Testkontonummer: 3199100002</p>
  *
  * @author Markus Potthast
  * @version 0.0.2
  */
-public class Method83
-        extends AbstractMethod {
+public class Method83 extends AbstractMethod {
 
     /**
-     * define logger
+     * define logger.
      */
     private static final Logger LOG = Logger.getLogger(Method83.class);
-    /**
-     * define weighting for mehtod a.
-     */
-    private static final int[] METHOD_A_WEIGHTING = new int[]{2, 3, 4, 5, 6, 7};
-    /**
-     * define weighting for sachkonten.
-     */
-    private static final int[] METHOD_SACHKONTEN_WEIGHTING = new int[]{2, 3, 4, 5, 6, 7, 8};
-    /**
-     * define weighting for mehtod b.
-     */
-    private static final int[] METHOD_B_WEIGHTING = new int[]{2, 3, 4, 5, 6};
 
     /**
-     * Minuent of check digit.
-     */
-    private static final int MINUEND_CHECK_DIGIT = 11;
-    /**
-     * is result 10.
-     */
-    private static final int RESULT_IS_10 = 10;
-
-    /**
-     * start factor = 3.
-     */
-    private static final int FACTOR_START = 3;
-    /**
-     * end factor = 9
-     */
-    private static final int FACTOR_END = 9;
-
-    /**
-     * Teest method 83
+     * Test method 83.
      *
      * @return boolean
      */
@@ -244,14 +143,12 @@ public class Method83
      * @return boolean
      * @see Method32
      */
-    boolean methodA(final int[] number) {
-
+    final boolean methodA(final int[] number) {
         Method32 method32 = new Method32();
         method32.setAccountNumberArray(number.clone());
-        return method32.check(METHOD_A_WEIGHTING) ||
-                methodASachkonten(number.clone());
+        return method32.check(WEIGHTING_2_3_4_5_6_7)
+                || methodASachkonten(number.clone());
     }
-
 
     /**
      * calculate sachkonten.
@@ -259,60 +156,47 @@ public class Method83
      * @param number account number array
      * @return boolean
      */
-    boolean methodASachkonten(final int[] number) {
-
-        int[] n = factor(number, METHOD_SACHKONTEN_WEIGHTING, FACTOR_START, FACTOR_END);
-        int pz = add(n, 2, 9);
+    private boolean methodASachkonten(final int[] number) {
+        int[] n = factor(number,
+                WEIGHTING_2_3_4_5_6_7_8,
+                FACTOR_START_3RD,
+                FACTOR_END_9TH
+        );
+        int pz = add(n, ADD_START_3RD, ADD_END_10TH);
         pz = modulus11(pz);
         return checkPz(pz, n);
     }
 
     /**
-     * <b>Methode B .</b></p>
-     * <p>
-     * Modulus 11, Gewichtung 2, 3, 4, 5, 6</p>
-     * <p>
+     * <b>Methode B .</b>
+     * <p> Modulus 11, Gewichtung 2, 3, 4, 5, 6</p> <p>
      * Die Berechnung und möglichen Ergebnisse entsprechen dem Verfahren
      * 33.</p>
      * <pre>
      * Stellennr.: 1 2 3 4 5 6 7 8 9 A (A=10)
      * Kontonr.:   x x x x K K K K K P
      * Gewichtung:       6 5 4 3 2</pre>
-     * <p>
-     * Testkontonummer: 0000156078</p>
-     * <p>
-     * Modulus 11, Gewichtung 2, 3, 4, 5, 6</p>
-     * <p>
-     * Die Berechnung und mögliche Ergebnisse entsprechen dem Verfahren 33.</p>
-     * <pre>Stellennr.: 1 2 3 4 5 6 7 8 9 A(A=10) Kontonr.: xxxxKKKKKP Gewichtung: 6 5 4 3 2</pre>
-     * <p>
-     * Testkontonummer: 0000156078</p>
-     * <p>
-     * Ergibt auch die Berechnung der Prüfziffer nach Methode B einen
-     * Prüfzifferfehler, ist eine weitere Berechnung mit der Methode C
-     * vorzunehmen.</p>
+     * <p> Testkontonummer: 0000156078</p> <p> Modulus 11, Gewichtung 2, 3, 4,
+     * 5, 6</p> <p> Die Berechnung und mögliche Ergebnisse entsprechen dem
+     * Verfahren 33.</p>
+     * <pre>Stellennr.: 1 2 3 4 5 6 7 8 9 A(A=10) Kontonr.: xxxxKKKKKP
+     * Gewichtung: 6 5 4 3 2</pre>
+     * <p> Testkontonummer: 0000156078</p> <p> Ergibt auch die Berechnung der
+     * Prüfziffer nach Methode B einen Prüfzifferfehler, ist eine weitere
+     * Berechnung mit der Methode C vorzunehmen.</p>
      *
      * @param number account number array
      * @return boolean
      * @see Method33
      */
-    boolean methodB(int[] number) {
+    final boolean methodB(final int[] number) {
         Method33 method33 = new Method33();
         method33.setAccountNumberArray(number);
-        return method33.check(METHOD_B_WEIGHTING);
+        return method33.check(CheckAccountNumber.WEIGHTING_2_3_4_5_6);
     }
 
-    private static final int[] WEIGHTING_A = new int[]{2, 3, 4, 5, 6};
-    private static final int[] WEIGHTING_B = new int[]{2, 3, 4, 5, 6, 7, 8};
-    private static final int METHOD_C_FACTOR_STRT = 5;
-    private static final int ADD_START = 2;
-    private static final int METHOD_C_ADD_START = 4;
-    private static final int ADD_END = 9;
-
-
-
     /**
-     * <b>Methode C. </b></p>
+     * <b>Methode C. </b>
      * <p>
      * Kontonummern, die bis zur Methode C gelangen und in der 10. Stelle eine
      * 7, 8 oder 9 haben, sind ungültig.</p>
@@ -357,45 +241,50 @@ public class Method83
      * <p>
      * Testkontonummer: 3199100002</p>
      *
+     * @param number account number array
+     * @return boolean
      * @see Method02
-     * </p>
      */
-    boolean methodC(final int[] number) {
+    final boolean methodC(final int[] number) {
         int[] n = number.clone();
-        if (n[ACCOUNT_NUMBER_PLACE_10th] == ACCOUNT_NUMBER_IS_7
-                || n[ACCOUNT_NUMBER_PLACE_10th] == ACCOUNT_NUMBER_IS_8
-                ) {
+        if (n[ACCOUNT_NUMBER_PLACE_10_TH] == ACCOUNT_NUMBER_IS_7
+                || n[ACCOUNT_NUMBER_PLACE_10_TH] == ACCOUNT_NUMBER_IS_8) {
             throw new InvalidAcountNumberException();
         }
-
         Method33 method33 = new Method33();
         if (n.length != ACCOUNT_NUMBER_LEGHT_10) {
             throw new AccountNumberLenghtException();
         }
-        n = method33.factor(n, WEIGHTING_A, METHOD_C_FACTOR_STRT, FACTOR_END);
-        int pz = method33.add(n, METHOD_C_ADD_START, ADD_END);
+        n = method33.factor(n,
+                WEIGHTING_2_3_4_5_6,
+                FACTOR_START_5TH,
+                FACTOR_END_9TH
+        );
+        int pz = method33.add(n, ADD_START_5TH, ADD_END_10TH);
         pz = modulus7(pz);
         if (method33.checkPz(pz, n)) {
             return true;
         }
-
         // reset number
         n = number;
-        if (n[2] == ACCOUNT_NUMBER_IS_9 && n[3] == ACCOUNT_NUMBER_IS_9) {
+        if (n[2] == ACCOUNT_NUMBER_IS_9
+                && n[ACCOUNT_NUMBER_PLACE_4_TH] == ACCOUNT_NUMBER_IS_9) {
             LOG.debug("ausname");
             LOG.debug("number : " + Arrays.toString(n));
-
             Method02 method02 = new Method02();
             method02.setAccountNumberArray(n);
-            n = method02.factor(n, WEIGHTING_B, FACTOR_START, FACTOR_END);
+            n = method02.factor(n,
+                    WEIGHTING_2_3_4_5_6_7_8,
+                    FACTOR_START_3RD,
+                    FACTOR_END_9TH
+            );
             LOG.debug("number : " + Arrays.toString(n));
-            pz = method02.add(n, ADD_START, ADD_END);
+            pz = method02.add(n, ADD_START_3RD, ADD_END_10TH);
             pz = method02.modulus11(pz);
             return checkPz(pz, n);
         }
         return false;
     }
-
 
     /**
      * override modulus 11.
@@ -406,8 +295,7 @@ public class Method83
     @Override
     protected int modulus11(final int number) {
         int checkDigit;
-        int n = number % 11;
-
+        int n = number % MODULUS_11;
         LOG.debug("%11: " + n);
         if (n == 0) {
             LOG.debug("pz 0: " + n);
@@ -431,18 +319,17 @@ public class Method83
      * @return boolean
      */
     @Override
-    protected int add(final int[] number, final int start, final int end) {
+    protected int add(
+            final int[] number, final int start, final int end
+    ) {
         LOG.debug(start + " to " + end);
         int pz = 0;
         for (int i = start; i < end; i++) {
-
             int o = number[i];
-
             LOG.debug("+" + o);
             pz += o;
         }
         LOG.debug("after add: " + pz);
         return pz;
     }
-
 }
