@@ -2,6 +2,9 @@ package de.detecmedia.checkaccountnumber;
 
 import java.util.Arrays;
 
+import static de.detecmedia.checkaccountnumber.converter.Weighting.Weighting;
+
+import de.detecmedia.checkaccountnumber.converter.Weighting;
 import org.apache.log4j.Logger;
 
 /**
@@ -35,7 +38,7 @@ public class Method00 extends AbstractMethod {
      */
     @Override
     public boolean test() {
-        return check(WEIGHTING_2_1_2_1_2_1_2_1_2_1);
+        return check(Weighting("2,1,2,1,2,1,2,1,2,1"));
     }
 
     /**
@@ -44,18 +47,18 @@ public class Method00 extends AbstractMethod {
      * @param weighting weighting int array
      * @return boolean
      */
-    protected boolean check(final int[] weighting) {
+    protected boolean check(final Weighting weighting) {
         int[] number = expand(this.getAccountNumberArray());
 
         log.debug("number: " + Arrays.toString(number));
         // Stellen der Kontonummer sind von rechts nach
         // links mit den Ziffern 2, 1, 2, 1, 2 usw. zu multiplizieren.
-        number = this.factor(number, weighting);
+        number = this.factor(number, weighting.getWeighting());
 
         int pz = this.add(number);
 
         pz = this.modulus10(pz);
-        if (pz == RESULT_IS_10) {
+        if (pz == 10) {
             pz = 0;
         }
         log.debug("pz: " + pz);

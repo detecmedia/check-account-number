@@ -1,5 +1,8 @@
 package de.detecmedia.checkaccountnumber;
 
+import de.detecmedia.checkaccountnumber.constants.AccountNumberPlace;
+import de.detecmedia.checkaccountnumber.constants.Factor;
+import de.detecmedia.checkaccountnumber.converter.Weighting;
 import de.detecmedia.checkaccountnumber.exception.AccountNumberLenghtException;
 import de.detecmedia.checkaccountnumber.exception.InvalidAcountNumberException;
 
@@ -146,7 +149,7 @@ public class Method83 extends AbstractMethod {
     final boolean methodA(final int[] number) {
         Method32 method32 = new Method32();
         method32.setAccountNumberArray(number.clone());
-        return method32.check(WEIGHTING_2_3_4_5_6_7)
+        return method32.check(Weighting.W_2_3_4_5_6_7)
                 || methodASachkonten(number.clone());
     }
 
@@ -158,9 +161,9 @@ public class Method83 extends AbstractMethod {
      */
     private boolean methodASachkonten(final int[] number) {
         int[] n = factor(number,
-                WEIGHTING_2_3_4_5_6_7_8,
-                FACTOR_START_3RD,
-                FACTOR_END_9TH
+                Weighting.W_2_3_4_5_6_7_8,
+                Factor.START_3RD,
+                Factor.END_9TH
         );
         int pz = add(n, ADD_START_3RD, ADD_END_10TH);
         pz = modulus11(pz);
@@ -192,7 +195,7 @@ public class Method83 extends AbstractMethod {
     final boolean methodB(final int[] number) {
         Method33 method33 = new Method33();
         method33.setAccountNumberArray(number);
-        return method33.check(CheckAccountNumber.WEIGHTING_2_3_4_5_6);
+        return method33.check(Weighting.W_2_3_4_5_6);
     }
 
     /**
@@ -247,8 +250,8 @@ public class Method83 extends AbstractMethod {
      */
     final boolean methodC(final int[] number) {
         int[] n = number.clone();
-        if (n[ACCOUNT_NUMBER_PLACE_10_TH] == ACCOUNT_NUMBER_IS_7
-                || n[ACCOUNT_NUMBER_PLACE_10_TH] == ACCOUNT_NUMBER_IS_8) {
+        if (n[AccountNumberPlace.P_10_TH] == ACCOUNT_NUMBER_IS_7
+                || n[AccountNumberPlace.P_10_TH] == ACCOUNT_NUMBER_IS_8) {
             throw new InvalidAcountNumberException();
         }
         Method33 method33 = new Method33();
@@ -256,9 +259,9 @@ public class Method83 extends AbstractMethod {
             throw new AccountNumberLenghtException();
         }
         n = method33.factor(n,
-                WEIGHTING_2_3_4_5_6,
-                FACTOR_START_5TH,
-                FACTOR_END_9TH
+                Weighting.W_2_3_4_5_6,
+                Factor.START_5TH,
+                Factor.END_9TH
         );
         int pz = method33.add(n, ADD_START_5TH, ADD_END_10TH);
         pz = modulus7(pz);
@@ -268,15 +271,15 @@ public class Method83 extends AbstractMethod {
         // reset number
         n = number;
         if (n[2] == ACCOUNT_NUMBER_IS_9
-                && n[ACCOUNT_NUMBER_PLACE_4_TH] == ACCOUNT_NUMBER_IS_9) {
+                && n[AccountNumberPlace.P_4_TH] == ACCOUNT_NUMBER_IS_9) {
             LOG.debug("ausname");
             LOG.debug("number : " + Arrays.toString(n));
             Method02 method02 = new Method02();
             method02.setAccountNumberArray(n);
             n = method02.factor(n,
-                    WEIGHTING_2_3_4_5_6_7_8,
-                    FACTOR_START_3RD,
-                    FACTOR_END_9TH
+                    Weighting.W_2_3_4_5_6_7_8,
+                    Factor.START_3RD,
+                    Factor.END_9TH
             );
             LOG.debug("number : " + Arrays.toString(n));
             pz = method02.add(n, ADD_START_3RD, ADD_END_10TH);

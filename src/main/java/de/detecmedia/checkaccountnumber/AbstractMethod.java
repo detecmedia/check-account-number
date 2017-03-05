@@ -1,6 +1,8 @@
 package de.detecmedia.checkaccountnumber;
 
+import de.detecmedia.checkaccountnumber.converter.Weighting;
 import de.detecmedia.checkaccountnumber.exception.InvalidAcountNumberException;
+
 
 import java.util.Arrays;
 
@@ -11,11 +13,11 @@ import org.apache.log4j.Logger;
  */
 public abstract class AbstractMethod implements CheckAccountNumber {
     /**
-     * account number array
+     * account number array.
      */
     private int[] accountNumberArray;
     /**
-     * Logger for this classe
+     * Logger for this class.
      */
     private final Logger log = Logger.getLogger(AbstractMethod.class);
     /**
@@ -83,12 +85,10 @@ public abstract class AbstractMethod implements CheckAccountNumber {
     }
 
     /**
-     * get account number as long
      *
-     * @return long account number
-     * @throws NumberFormatException
+     * @return long
      */
-    public long getLong() throws NumberFormatException {
+    public long getLong() {
         log.debug("set Accountnumber is: " + accountNumber);
         if (accountNumber == null) {
             StringBuilder str = new StringBuilder();
@@ -107,17 +107,17 @@ public abstract class AbstractMethod implements CheckAccountNumber {
      * @param zahl int
      * @return int quersumme
      */
-    public int quersumme(int zahl) {
+    public int quersumme(final int zahl) {
 
         int quersumme = 0;
+        int z = zahl;
+
         do {
-            quersumme = quersumme + zahl % 10;
-            zahl = zahl / 10;
-        } while (zahl > 0);
+            quersumme = quersumme + z % 10;
+            z = z / 10;
+        } while (z > 0);
 
-        zahl = quersumme;
-
-        return zahl;
+        return quersumme;
     }
 
     /**
@@ -361,5 +361,13 @@ public abstract class AbstractMethod implements CheckAccountNumber {
 
     public void setWeighting(int[] weighting) {
         this.weighting = weighting;
+    }
+
+    protected boolean check(int[] weighting) {
+        return check(Weighting.Weighting(weighting));
+    }
+
+    protected boolean check(Weighting weighting) {
+        return false;
     }
 }

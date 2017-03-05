@@ -1,5 +1,6 @@
 package de.detecmedia.checkaccountnumber;
 
+import de.detecmedia.checkaccountnumber.converter.Weighting;
 import org.apache.log4j.Logger;
 
 /**
@@ -49,10 +50,10 @@ public class MethodA1
         if (String.valueOf(getLong()).length() == 9) {
             return false;
         }
-        weighting = new int[]{2, 1, 2, 1, 2, 1, 2, 0, 0};
+        weighting = new int[]{};
         Method00 method00 = new Method00();
         method00.setAccountNumberArray(this.getAccountNumberArray());
-        return method00.check(weighting);
+        return method00.check(Weighting.Weighting("2, 1, 2, 1, 2, 1, 2, 0, 0"));
     }
 
 }

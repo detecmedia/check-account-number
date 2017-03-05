@@ -5,6 +5,7 @@
  */
 package de.detecmedia.checkaccountnumber;
 
+import de.detecmedia.checkaccountnumber.converter.Weighting;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -94,7 +95,7 @@ public class Method00Test {
         Method00 instance = new Method00();
         instance.setAccountNumber("9290701");
         boolean expResult = true;
-        boolean result = instance.check(weighting);
+        boolean result = instance.check(Weighting.Weighting(weighting));
         assertEquals(expResult, result);
     }
 

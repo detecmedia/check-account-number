@@ -1,5 +1,7 @@
 package de.detecmedia.checkaccountnumber;
 
+import static de.detecmedia.checkaccountnumber.converter.Weighting.Weighting;
+
 /**
  * Kennzeichen 79.
  * <p>
@@ -83,8 +85,8 @@ public class Method79
      * @return
      */
     boolean variant1(int[] number) {
-        weighting = new int[]{2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2};
-        return this.check(weighting);
+        weighting = new int[]{};
+        return this.check(Weighting("2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2"));
     }
 
     /**

@@ -1,5 +1,8 @@
 package de.detecmedia.checkaccountnumber;
 
+import static de.detecmedia.checkaccountnumber.converter.Weighting.Weighting;
+
+import de.detecmedia.checkaccountnumber.converter.Weighting;
 import org.apache.log4j.Logger;
 
 /**
@@ -23,21 +26,33 @@ import org.apache.log4j.Logger;
  */
 public class Method06 extends AbstractMethod {
 
-    private static Logger log = Logger.getLogger(Method06.class);
+    private static final Logger LOG = Logger.getLogger(Method06.class);
 
-    private int[] weighting;
 
+    /**
+     * test medthod 06
+     *
+     * @return
+     */
     @Override
     public boolean test() {
-        weighting = new int[]{2, 3, 4, 5, 6, 7, 2, 3, 4, 5, 6, 7};
-        return check(weighting);
+        LOG.debug("test mebtod 06");
+        // return check(Weighting.W_);
+        return check(Weighting("2,3,4,5,6,7,2,3,4,5,6,7"));
+
     }
 
-    public boolean check(int[] weighting) {
+    /**
+     * check
+     *
+     * @param weighting weighting array
+     * @return
+     */
 
+    public boolean check(final Weighting weighting) {
         int[] number = this.getAccountNumberArray();
 
-        number = this.factor(number, weighting);
+        number = this.factor(number, weighting.getWeighting());
 
         int pz = this.add(number);
 
@@ -49,18 +64,18 @@ public class Method06 extends AbstractMethod {
     @Override
     protected int modulus11(int pz) {
         pz %= 11;
-        log.debug("%11: " + pz);
+        LOG.debug("%11: " + pz);
         if (pz == 0) {
-            log.debug("pz 0: " + pz);
+            LOG.debug("pz 0: " + pz);
             return 0;
         }
         if (pz == 1) {
-            log.debug("pz 1: " + pz);
+            LOG.debug("pz 1: " + pz);
             return 0;
         }
         pz = 11 - pz;
         pz %= 10;
-        log.debug("pz all: " + pz);
+        LOG.debug("pz all: " + pz);
         return pz;
     }
 
@@ -71,14 +86,14 @@ public class Method06 extends AbstractMethod {
 
     @Override
     protected int add(int[] number, int start, int end) {
-        log.debug(start + " to " + end);
+        LOG.debug(start + " to " + end);
         int pz = 0;
         for (int i = start; i < end; i++) {
-            log.debug("+" + number[i]);
+            LOG.debug("+" + number[i]);
             int o = number[i];
             pz += o;
         }
-        log.debug("after add: " + pz);
+        LOG.debug("after add: " + pz);
         return pz;
     }
 

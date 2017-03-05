@@ -1,5 +1,7 @@
 package de.detecmedia.checkaccountnumber;
 
+import de.detecmedia.checkaccountnumber.converter.Weighting;
+
 /**
  * Kennzeichen A5.
  * <p>
@@ -77,10 +79,10 @@ public class MethodA5
      * @return
      */
     boolean variant1(int[] number) {
-        weighting = new int[]{2, 1, 2, 1, 2, 1, 2, 1, 2};
+        weighting = new int[]{};
         Method00 method00 = new Method00();
         method00.setAccountNumberArray(number);
-        return method00.check(weighting);
+        return method00.check(Weighting.Weighting("2, 1, 2, 1, 2, 1, 2, 1, 2"));
     }
 
     /**
@@ -99,9 +101,9 @@ public class MethodA5
      */
     boolean variant2(int[] number) {
         Method10 method10 = new Method10();
-        weighting = new int[]{2, 3, 4, 5, 6, 7, 8, 9, 10};
+        weighting = new int[]{};
         method10.setAccountNumberArray(number);
-        return method10.check(weighting);
+        return method10.check(Weighting.Weighting("2, 3, 4, 5, 6, 7, 8, 9, 10"));
     }
 
 }

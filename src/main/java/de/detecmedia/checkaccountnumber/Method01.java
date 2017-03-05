@@ -1,5 +1,6 @@
 package de.detecmedia.checkaccountnumber;
 
+import de.detecmedia.checkaccountnumber.converter.Weighting;
 import org.apache.log4j.Logger;
 
 /**
@@ -31,7 +32,7 @@ public class Method01 extends AbstractMethod {
      */
     @Override
     public boolean test() {
-        return this.check(WEIGHTING_3_7_1_3_7_1_3_7_1_3_7_1);
+        return this.check(Weighting.W_3_7_1_3_7_1_3_7_1_3_7_1);
     }
 
     /**

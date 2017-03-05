@@ -2,6 +2,7 @@ package de.detecmedia.checkaccountnumber;
 
 import java.util.Arrays;
 
+import de.detecmedia.checkaccountnumber.converter.Weighting;
 import org.apache.log4j.Logger;
 
 /**
@@ -35,7 +36,7 @@ public class Method02 extends AbstractMethod {
      */
     @Override
     public boolean test() {
-        return check(WEIGHTING_2_3_4_5_6_7_8_9_2);
+        return check(Weighting.W_2_3_4_5_6_7_8_9_2);
     }
 
     /**
@@ -59,6 +60,7 @@ public class Method02 extends AbstractMethod {
 
     /**
      * addition.
+     *
      * @param number account number array
      * @param start  start pos
      * @param end    end pos

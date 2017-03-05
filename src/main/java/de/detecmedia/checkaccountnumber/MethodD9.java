@@ -1,5 +1,7 @@
 package de.detecmedia.checkaccountnumber;
 
+import de.detecmedia.checkaccountnumber.converter.Weighting;
+
 /**
  * Kennzeichen D9.
  * <p>
@@ -77,8 +79,8 @@ public class MethodD9 extends AbstractMethod {
     boolean variant1(int[] number) {
         Method00 m = new Method00();
         m.setAccountNumberArray(number);
-        weighting = new int[]{2, 1, 2, 1, 2, 1, 2, 1, 2};
-        return m.check(weighting);
+        weighting = new int[]{};
+        return m.check(Weighting.Weighting("2, 1, 2, 1, 2, 1, 2, 1, 2"));
     }
 
     /**

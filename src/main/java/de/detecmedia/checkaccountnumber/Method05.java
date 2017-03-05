@@ -1,5 +1,6 @@
 package de.detecmedia.checkaccountnumber;
 
+import de.detecmedia.checkaccountnumber.converter.Weighting;
 import org.apache.log4j.Logger;
 
 /**
@@ -15,14 +16,19 @@ import org.apache.log4j.Logger;
  */
 public class Method05 extends Method01 {
 
-    private static Logger log = Logger.getLogger("de.detecmedia.ceckaccountnumber.Methode05");
+    /**
+     * define logger.
+     */
+    private static final Logger LOG = Logger.getLogger(Method05.class);
 
-    private int[] weighting;
+    /**
+     * test method 05.
+     *
+     * @return boolean
+     */
     @Override
-
     public boolean test() {
-        weighting = new int[]{7, 3, 1, 7, 3, 1, 7, 3, 1};
-        return this.check(weighting);
+        LOG.debug("test mebtod 05");
+        return this.check(Weighting.W_7_3_1_7_3_1_7_3_1);
     }
-
 }

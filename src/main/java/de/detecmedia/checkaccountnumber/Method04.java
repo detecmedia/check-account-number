@@ -1,5 +1,6 @@
 package de.detecmedia.checkaccountnumber;
 
+import de.detecmedia.checkaccountnumber.converter.Weighting;
 import org.apache.log4j.Logger;
 
 /**
@@ -30,6 +31,6 @@ public class Method04 extends Method02 {
     @Override
     public boolean test() {
         LOG.debug("test mebtod 03");
-        return this.check(WEIGHTING_2_3_4_5_6_7_2_3_4);
+        return this.check(Weighting.W_2_3_4_5_6_7_2_3_4);
     }
 }
