@@ -135,11 +135,8 @@ public class MethodA4 extends AbstractMethod {
         }
         number = this.getAccountNumberArray();
         number = expand(number);
-        if (variant4(number)) {
-            return true;
-        }
+        return variant4(number);
 
-        return false;
     }
 
     /**

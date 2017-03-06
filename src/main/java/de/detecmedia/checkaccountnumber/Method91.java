@@ -109,10 +109,7 @@ public class Method91 extends Method06 {
         }
         number = this.getAccountNumberArray();
         number = expand(number);
-        if (variant4(number)) {
-            return true;
-        }
-        return false;
+        return variant4(number);
 
     }
 

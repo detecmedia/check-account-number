@@ -121,10 +121,7 @@ public class MethodC5
         if (variant3(number.clone())) {
             return true;
         }
-        if (variant4(number.clone())) {
-            return true;
-        }
-        return false;
+        return variant4(number.clone());
     }
 
     /**

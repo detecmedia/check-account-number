@@ -44,10 +44,7 @@ public class MethodC7
         if (variant1(number.clone())) {
             return true;
         }
-        if (variant2(number.clone())) {
-            return true;
-        }
-        return false;
+        return variant2(number.clone());
     }
 
     /**

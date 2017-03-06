@@ -75,10 +75,7 @@ public class MethodC1
         if (variant1(number.clone()) && number[0] != 5) {
             return true;
         }
-        if (variant2(number.clone()) && number[0] == 5) {
-            return true;
-        }
-        return false;
+        return variant2(number.clone()) && number[0] == 5;
     }
 
     /**

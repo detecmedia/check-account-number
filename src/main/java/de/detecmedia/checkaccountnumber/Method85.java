@@ -99,10 +99,7 @@ public class Method85
             return true;
         }
 
-        if (exception(numnber.clone())) {
-            return true;
-        }
-        return false;
+        return exception(numnber.clone());
     }
 
     /**

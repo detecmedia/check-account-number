@@ -71,10 +71,7 @@ public class MethodD6
         }
 
         number = expand(number.clone());
-        if (variant3(number)) {
-            return true;
-        }
-        return false;
+        return variant3(number);
 
     }
 

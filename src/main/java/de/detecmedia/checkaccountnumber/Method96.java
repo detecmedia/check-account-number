@@ -53,10 +53,7 @@ public class Method96
         }
         number = this.getAccountNumberArray();
         number = expand(number);
-        if (variant3(number)) {
-            return true;
-        }
-        return false;
+        return variant3(number);
     }
 
     /**

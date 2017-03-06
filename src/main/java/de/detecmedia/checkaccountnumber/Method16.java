@@ -23,11 +23,8 @@ public class Method16 extends Method06 {
     @Override
     public boolean test() {
         weighting = new int[]{2, 3, 4, 5, 6, 7, 2, 3, 4};
-        if (this.check(weighting)) {
-            return true;
-        }
+        return this.check(weighting);
 
-        return false;
     }
 
     @Override

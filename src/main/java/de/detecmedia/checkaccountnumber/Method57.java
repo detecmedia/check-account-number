@@ -315,10 +315,7 @@ public class Method57
         for (int i = 0; i < number.length; i++) {
             str.append(number[i]);
         }
-        if (str.toString().equals("0185125434")) {
-            return true;
-        }
-        return false;
+        return str.toString().equals("0185125434");
     }
 
 }

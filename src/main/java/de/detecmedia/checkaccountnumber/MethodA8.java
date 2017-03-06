@@ -70,10 +70,7 @@ public class MethodA8
             return true;
         }
         number = this.getAccountNumberArray();
-        if (exception(number)) {
-            return true;
-        }
-        return false;
+        return exception(number);
     }
 
     /**

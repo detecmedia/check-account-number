@@ -1,11 +1,13 @@
 package de.detecmedia.checkaccountnumber;
 
-import java.util.Arrays;
-
-import static de.detecmedia.checkaccountnumber.converter.Weighting.Weighting;
-
+import de.detecmedia.checkaccountnumber.constants.DigitCheck;
 import de.detecmedia.checkaccountnumber.converter.Weighting;
 import org.apache.log4j.Logger;
+
+import java.util.Arrays;
+
+import static de.detecmedia.checkaccountnumber.calculator.Factory.factory;
+import static de.detecmedia.checkaccountnumber.converter.Weighting.Weighting;
 
 /**
  * Kennzeichen 00.
@@ -53,20 +55,20 @@ public class Method00 extends AbstractMethod {
         log.debug("number: " + Arrays.toString(number));
         // Stellen der Kontonummer sind von rechts nach
         // links mit den Ziffern 2, 1, 2, 1, 2 usw. zu multiplizieren.
-        number = this.factor(number, weighting.getWeighting());
+        number = factory(number, weighting.getWeighting());
 
-        int pz = this.add(number);
+        int checkDigit = this.add(number);
 
-        pz = this.modulus10(pz);
-        if (pz == 10) {
-            pz = 0;
+        checkDigit = this.modulus10(checkDigit);
+        if (checkDigit == DigitCheck.IS_10) {
+            checkDigit = 0;
         }
-        log.debug("pz: " + pz);
+        log.debug("checkDigit: " + checkDigit);
         log.debug(
                 "last number of account number: "
                         + number[number.length - 1]);
 
-        return checkPz(pz, number);
+        return checkPz(checkDigit, number);
 
     }
 

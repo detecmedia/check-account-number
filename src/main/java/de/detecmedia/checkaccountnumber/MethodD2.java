@@ -56,10 +56,7 @@ public class MethodD2
         if (variant2(number.clone())) {
             return true;
         }
-        if (variant3(number.clone())) {
-            return true;
-        }
-        return false;
+        return variant3(number.clone());
     }
 
     /**

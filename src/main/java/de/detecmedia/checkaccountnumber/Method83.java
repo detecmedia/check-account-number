@@ -154,7 +154,7 @@ public class Method83 extends AbstractMethod {
     }
 
     /**
-     * calculate sachkonten.
+     * Factory sachkonten.
      *
      * @param number account number array
      * @return boolean

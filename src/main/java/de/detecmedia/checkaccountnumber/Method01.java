@@ -1,7 +1,12 @@
 package de.detecmedia.checkaccountnumber;
 
+import de.detecmedia.checkaccountnumber.calculator.Factory;
+import de.detecmedia.checkaccountnumber.constants.Factor;
 import de.detecmedia.checkaccountnumber.converter.Weighting;
 import org.apache.log4j.Logger;
+
+import static de.detecmedia.checkaccountnumber.calculator.Factory.factory;
+import static de.detecmedia.checkaccountnumber.converter.Weighting.Weighting;
 
 /**
  * Kennzeichen 01.
@@ -32,7 +37,7 @@ public class Method01 extends AbstractMethod {
      */
     @Override
     public boolean test() {
-        return this.check(Weighting.W_3_7_1_3_7_1_3_7_1_3_7_1);
+        return this.check(Weighting("3,7,1,3,7,1,3,7,1,3,7,1"));
     }
 
     /**
@@ -41,10 +46,10 @@ public class Method01 extends AbstractMethod {
      * @param weighting weighting array
      * @return boolean
      */
-    protected boolean check(final int[] weighting) {
+    protected boolean check(final Weighting weighting) {
         int[] number = this.getAccountNumberArray();
 
-        number = this.factor(number, weighting);
+        number = factory(number, weighting.getWeighting());
 
         int pz = add(number);
 

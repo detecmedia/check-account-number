@@ -88,10 +88,7 @@ public class Method84 extends Method51 {
         if (methodB(number)) {
             return true;
         }
-        if (methodC(number)) {
-            return true;
-        }
-        return false;
+        return methodC(number);
     }
 
     /**

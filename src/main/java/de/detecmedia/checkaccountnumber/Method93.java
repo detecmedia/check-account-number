@@ -72,14 +72,11 @@ public class Method93
         }
         number = this.getAccountNumberArray();
         number = expand(number);
-        if (number[0] == 0
+        return number[0] == 0
                 && number[1] == 0
                 && number[2] == 0
                 && number[3] == 0
-                && variant2(number)) {
-            return true;
-        }
-        return false;
+                && variant2(number);
 
     }
 
@@ -98,10 +95,7 @@ public class Method93
             return true;
         }
         number = tmp.clone();
-        if (variantB(number, MODULUS7)) {
-            return true;
-        }
-        return false;
+        return variantB(number, MODULUS7);
     }
 
     boolean variant2(int[] number) {
@@ -118,10 +112,7 @@ public class Method93
             return true;
         }
         number = tmp.clone();
-        if (variantB(number, MODULUS11)) {
-            return true;
-        }
-        return false;
+        return variantB(number, MODULUS11);
     }
 
     boolean variantA(int[] number, int modulus) {

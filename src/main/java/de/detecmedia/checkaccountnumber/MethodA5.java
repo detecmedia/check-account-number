@@ -53,10 +53,7 @@ public class MethodA5
         }
         number = this.getAccountNumberArray();
         number = expand(number);
-        if (variant2(number)) {
-            return true;
-        }
-        return false;
+        return variant2(number);
 
     }
 

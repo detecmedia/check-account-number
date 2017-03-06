@@ -1,12 +1,16 @@
 package de.detecmedia.checkaccountnumber;
 
+import de.detecmedia.checkaccountnumber.calculator.Modulus;
 import de.detecmedia.checkaccountnumber.converter.Weighting;
-import de.detecmedia.checkaccountnumber.exception.InvalidAcountNumberException;
 
 
 import java.util.Arrays;
 
 import org.apache.log4j.Logger;
+
+import static de.detecmedia.checkaccountnumber.calculator.Factory.factory;
+import static de.detecmedia.checkaccountnumber.calculator.Factory.factoryOld;
+import static de.detecmedia.checkaccountnumber.calculator.Modulus.Modulus11;
 
 /**
  * @author Markus Potthast
@@ -150,51 +154,19 @@ public abstract class AbstractMethod implements CheckAccountNumber {
     protected int[] factor(int[] number, int[] weighting) {
         log.debug("accountNumber: " + this.accountNumber);
 
-        return this.factor(number, weighting, 1, number.length - 1);
+        return factory(number, weighting);
         //return number;
     }
 
     /**
      * @param number
      * @param weighting
-     * @param start     start calculate from account number position
-     * @param end       end calculate by account number position
+     * @param start     start Factory from account number position
+     * @param end       end Factory by account number position
      * @return
      */
     protected int[] factor(int[] number, int[] weighting, int start, int end) {
-
-        start--;
-        log.debug("start: " + start);
-        log.debug("end: " + end);
-        log.debug("tmp array:" + (end - start));
-        int[] tmp = new int[(end - start)];
-        log.debug("tmp.lenght " + tmp.length);
-        //end--;
-        log.debug("number:" + Arrays.toString(number));
-        log.debug("weighting:" + Arrays.toString(weighting));
-
-        int tmpI = 0;
-        for (int i = start; i < end; i++) {
-            tmp[tmpI++] = number[i];
-
-        }
-        tmpI = 0;
-        for (int i = tmp.length - 1; i != -1; i--) {
-            int u = tmp[i];
-            if (tmpI < weighting.length) {
-                log.debug(u + " * " + weighting[tmpI]);
-                tmp[i] *= weighting[tmpI++];
-            }
-        }
-        log.debug("tmp: " + Arrays.toString(tmp));
-        tmpI = 0;
-
-        log.debug("tmp " + start + "-" + end + ": " + Arrays.toString(tmp));
-        for (int i = start; i < end; i++) {
-            number[i] = tmp[tmpI++];
-        }
-        log.debug("number: " + Arrays.toString(number));
-        return number;
+        return factoryOld(number, weighting, start, end);
     }
 
     /**
@@ -220,21 +192,7 @@ public abstract class AbstractMethod implements CheckAccountNumber {
      * @return int check digit
      */
     protected int modulus11(int number) {
-        int checkDigit;
-        number %= 11;
-
-        log.debug("%11: " + number);
-        if (number == 0) {
-            log.debug("pz 0: " + number);
-            return 0;
-        }
-        if (number == 1) {
-            log.debug("InvalidException");
-            throw new InvalidAcountNumberException();
-        }
-        checkDigit = 11 - number;
-        log.debug("pz all: " + checkDigit);
-        return checkDigit;
+        return Modulus11(number);
     }
 
     /**
@@ -259,10 +217,7 @@ public abstract class AbstractMethod implements CheckAccountNumber {
     protected boolean checkPz(int pz, int[] number, int pos) {
         log.debug("Number: " + Arrays.toString(number));
         log.debug("pz to number " + pos + " = " + pz + " to " + number[pos - 1]);
-        if (pz == number[--pos]) {
-            return true;
-        }
-        return false;
+        return pz == number[--pos];
     }
 
     protected int add(int[] number) {
@@ -348,11 +303,7 @@ public abstract class AbstractMethod implements CheckAccountNumber {
      * @return
      */
     protected int modulus7(int number) {
-        number = (number % 7);
-        if (number == 0) {
-            return 0;
-        }
-        return 7 - number;
+        return Modulus.Modulus7(number);
     }
 
     public int[] getWeighting() {
@@ -368,6 +319,6 @@ public abstract class AbstractMethod implements CheckAccountNumber {
     }
 
     protected boolean check(Weighting weighting) {
-        return false;
+        return check(weighting.getWeighting());
     }
 }

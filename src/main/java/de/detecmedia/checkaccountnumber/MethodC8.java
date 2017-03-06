@@ -64,10 +64,7 @@ public class MethodC8
         } catch (InvalidAcountNumberException ex) {
 
         }
-        if (variant3(number.clone())) {
-            return true;
-        }
-        return false;
+        return variant3(number.clone());
     }
 
     /**

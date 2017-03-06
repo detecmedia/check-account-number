@@ -18,7 +18,6 @@ public class Weighting {
 
     private int[] weightingArray;
 
-    private List<de.detecmedia.checkaccountnumber.model.Weighting> list;
 
     private static final Logger LOG = Logger.getLogger(Weighting.class);
 

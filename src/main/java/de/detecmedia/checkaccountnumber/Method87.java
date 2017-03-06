@@ -109,11 +109,8 @@ public class Method87 extends AbstractMethod {
         }
         number = this.getAccountNumberArray();
         number = expand(number);
-        if (exception(number)) {
-            return true;
-        }
+        return exception(number);
 
-        return false;
     }
 
     /**

@@ -40,10 +40,7 @@ public class Method30 extends Method00 {
 
         pz = this.modulus10(pz);
 
-        if (pz == number[number.length - 1]) {
-            return true;
-        }
-        return false;
+        return pz == number[number.length - 1];
     }
 
     @Override

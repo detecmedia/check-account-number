@@ -55,10 +55,7 @@ public class MethodD9 extends AbstractMethod {
         if (variant2(number.clone())) {
             return true;
         }
-        if (variant3(number.clone())) {
-            return true;
-        }
-        return false;
+        return variant3(number.clone());
     }
 
     /**
