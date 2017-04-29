@@ -33,9 +33,12 @@ package de.detecmedia.checkaccountnumber;
 public class Method70
         extends AbstractMethod {
 
+    /**
+     * Test method.
+     */
     @Override
     public boolean test() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

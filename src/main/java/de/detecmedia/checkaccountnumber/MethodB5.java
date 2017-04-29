@@ -1,5 +1,7 @@
 package de.detecmedia.checkaccountnumber;
 
+import static de.detecmedia.checkaccountnumber.converter.Weighting.Weighting;
+
 /**
  * Kennzeichen B5.
  * <p>
@@ -38,11 +40,13 @@ package de.detecmedia.checkaccountnumber;
  * @author Markus Potthast
  * @version 0.0.2
  */
-public class MethodB5
-        extends AbstractMethod {
+public class MethodB5 extends AbstractMethod {
 
-    private int[] weighting;
-
+    /**
+     * Test account number.
+     *
+     * @return boolean
+     */
     @Override
     public boolean test() {
         int[] number = this.getAccountNumberArray();
@@ -72,14 +76,14 @@ public class MethodB5
      * Testkontonummern (falsch): 7414398260, 8347251693, 1151043211,
      * 2345678901, 5678901234, 9000293707</p>
      *
-     * @return
+     * @param number account number
+     * @return boolean
      */
-    boolean variant1(int[] number) {
+    final boolean variant1(final int[] number) {
 
-        weighting = new int[]{7, 3, 1, 7, 3, 1, 7, 3, 1};
         Method01 m = new Method01();
         m.setAccountNumberArray(number);
-        return m.check(weighting);
+        return m.check(Weighting("7, 3, 1, 7, 3, 1, 7, 3, 1").getWeighting());
 
     }
 
@@ -95,10 +99,10 @@ public class MethodB5
      * Testkontonummern (falsch): 0159004165, 0023456787, 0056789018,
      * 3045000333</p>
      *
-     * @param number
-     * @return
+     * @param number account number
+     * @return boolean
      */
-    boolean variant2(int[] number) {
+    final boolean variant2(final int[] number) {
         Method00 m = new Method00();
         m.setAccountNumberArray(number);
         return m.test();
