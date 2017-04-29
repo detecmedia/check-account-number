@@ -89,7 +89,9 @@ public class Method85Test {
     public void testMethodA() {
         System.out.println("methodA");
         int[] numnber = {0, 0, 0, 1, 1, 5, 6, 0, 7, 1};
+
         Method85 instance = new Method85();
+        instance.setAccountNumberArray(numnber);
         boolean expResult = true;
         boolean result = instance.methodA(numnber);
         assertEquals(expResult, result);

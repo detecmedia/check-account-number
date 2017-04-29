@@ -1,10 +1,13 @@
 package de.detecmedia.checkaccountnumber;
 
+import de.detecmedia.checkaccountnumber.converter.Weighting;
 import de.detecmedia.checkaccountnumber.exception.InvalidAcountNumberException;
 
 import java.util.Arrays;
 
 import org.apache.log4j.Logger;
+
+import static de.detecmedia.checkaccountnumber.converter.Weighting.Weighting;
 
 /**
  * Kennzeichen 57.
@@ -210,9 +213,9 @@ public class Method57
 
         Method00 method00 = new Method00();
         method00.setAccountNumberArray(number);
-        log.debug("accountNumber is: " + getAccountNumber());
+   //     log.debug("accountNumber is: " + getAccountNumber());
 
-        return method00.check(weighting);
+        return method00.check(Weighting("1, 2, 1, 2, 1, 2, 1, 2, 1"));
     }
 
     /**

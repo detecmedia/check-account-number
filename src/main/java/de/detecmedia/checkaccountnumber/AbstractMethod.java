@@ -6,11 +6,13 @@ import de.detecmedia.checkaccountnumber.converter.Weighting;
 
 import java.util.Arrays;
 
+import de.detecmedia.checkaccountnumber.model.AccountNumber;
 import org.apache.log4j.Logger;
 
 import static de.detecmedia.checkaccountnumber.calculator.Factory.factory;
 import static de.detecmedia.checkaccountnumber.calculator.Factory.factoryOld;
 import static de.detecmedia.checkaccountnumber.calculator.Modulus.Modulus11;
+import static de.detecmedia.checkaccountnumber.model.AccountNumber.accountNumber;
 
 /**
  * @author Markus Potthast
@@ -20,31 +22,32 @@ public abstract class AbstractMethod implements CheckAccountNumber {
      * account number array.
      */
     private int[] accountNumberArray;
+
     /**
      * Logger for this class.
      */
-    private final Logger log = Logger.getLogger(AbstractMethod.class);
+    private final static Logger LOG = Logger.getLogger(AbstractMethod.class);
+
     /**
-     * weighting,
+     * define weighting.
      */
     private int[] weighting;
-
-    public String getAccountNumber() {
-        return accountNumber;
-    }
 
     /**
      * AccountNumber
      */
-    private String accountNumber;
+    private AccountNumber accountNumber;
 
     /**
      * @param accountnumber AccountNumber
      */
     @Override
     public void setAccountNumber(final String accountnumber) {
+        this.accountNumber = accountNumber(accountnumber);
+    }
 
-        this.accountNumber = accountnumber;
+    public String getAccountNumber() {
+        return accountNumber.get();
     }
 
     /**
@@ -53,17 +56,7 @@ public abstract class AbstractMethod implements CheckAccountNumber {
      * @return int[] accountNumner
      */
     protected int[] getAccountNumberArray() {
-        if (this.accountNumberArray == null) {
-            int lengthOfAccountNumber = accountNumber.length();
-            int[] value = new int[lengthOfAccountNumber];
-            log.debug("length of accountNumber: " + lengthOfAccountNumber);
-            for (int i = 0; i < value.length; i++) {
-                log.debug("Char at Pos " + i + " is " + accountNumber.charAt(i));
-                value[i] = accountNumber.charAt(i) - '0';
-            }
-            this.accountNumberArray = value;
-        }
-        return this.accountNumberArray;
+        return this.accountNumber.getIntArray();
     }
 
     /**
@@ -72,8 +65,13 @@ public abstract class AbstractMethod implements CheckAccountNumber {
      * @param accountnumberarray account number
      */
     public void setAccountNumberArray(final int[] accountnumberarray) {
+        String tmp = "";
+        for (int number : accountnumberarray) {
+            tmp += number;
+        }
+        accountNumber = accountNumber(tmp);
+        this.accountNumberArray = accountNumber.getIntArray();
 
-        this.accountNumberArray = accountnumberarray;
     }
 
     /**
@@ -84,25 +82,16 @@ public abstract class AbstractMethod implements CheckAccountNumber {
      *                               int.
      */
     public int getInt() throws NumberFormatException {
-        log.debug("set Accountnumber is: " + accountNumber);
+        LOG.debug("set Accountnumber is: " + accountNumber);
         return Integer.parseInt(accountNumber.trim());
     }
 
     /**
-     *
      * @return long
      */
     public long getLong() {
-        log.debug("set Accountnumber is: " + accountNumber);
-        if (accountNumber == null) {
-            StringBuilder str = new StringBuilder();
-            for (int i = 0; i < accountNumberArray.length; i++) {
-                int b = accountNumberArray[i];
-                str.append(b);
-            }
-            accountNumber = str.toString();
-        }
-        return Long.parseLong(accountNumber);
+        LOG.debug("set Accountnumber is: " + accountNumber);
+        return accountNumber.getAccountNumber();
     }
 
     /**
@@ -152,7 +141,7 @@ public abstract class AbstractMethod implements CheckAccountNumber {
      * @return int
      */
     protected int[] factor(int[] number, int[] weighting) {
-        log.debug("accountNumber: " + this.accountNumber);
+        LOG.debug("accountNumber: " + this.accountNumber);
 
         return factory(number, weighting);
         //return number;
@@ -178,7 +167,7 @@ public abstract class AbstractMethod implements CheckAccountNumber {
     protected int modulus10(int number) {
         number %= 10;
         int checkDigit;
-        log.debug("pz: " + (checkDigit = 10 - number));
+        LOG.debug("pz: " + (checkDigit = 10 - number));
         if (checkDigit == 10) {
             checkDigit = 0;
         }
@@ -215,8 +204,8 @@ public abstract class AbstractMethod implements CheckAccountNumber {
      * @return true|false after check
      */
     protected boolean checkPz(int pz, int[] number, int pos) {
-        log.debug("Number: " + Arrays.toString(number));
-        log.debug("pz to number " + pos + " = " + pz + " to " + number[pos - 1]);
+        LOG.debug("Number: " + Arrays.toString(number));
+        LOG.debug("pz to number " + pos + " = " + pz + " to " + number[pos - 1]);
         return pz == number[--pos];
     }
 
@@ -233,7 +222,7 @@ public abstract class AbstractMethod implements CheckAccountNumber {
      * @return
      */
     protected int add(int[] number, int start, int end) {
-        log.debug(start + " to " + end);
+        LOG.debug(start + " to " + end);
         int pz = 0;
         for (int i = start--; i < end; i++) {
 
@@ -241,10 +230,10 @@ public abstract class AbstractMethod implements CheckAccountNumber {
             if (o > 9) {
                 o = quersumme(o);
             }
-            log.debug("+" + o);
+            LOG.debug("+" + o);
             pz += o;
         }
-        log.debug("after add: " + pz);
+        LOG.debug("after add: " + pz);
         return pz;
     }
 
@@ -272,7 +261,7 @@ public abstract class AbstractMethod implements CheckAccountNumber {
             for (int i = pos; i < number.length; i++) {
                 tmp[tmpI++] = number[i];
             }
-            log.debug("move: " + Arrays.toString(tmp));
+            LOG.debug("move: " + Arrays.toString(tmp));
             number = tmp;
         } else {
             int[] tmp = new int[number.length];
@@ -280,7 +269,7 @@ public abstract class AbstractMethod implements CheckAccountNumber {
             for (int i = pos; i < tmp.length; i++) {
                 tmp[i] = number[tmpI++];
             }
-            log.debug("move: " + Arrays.toString(tmp));
+            LOG.debug("move: " + Arrays.toString(tmp));
             number = tmp;
         }
         return number;
@@ -289,8 +278,8 @@ public abstract class AbstractMethod implements CheckAccountNumber {
     @Override
     final public char[] getFlag() {
         String name = getClass().getName();
-        log.debug(name);
-        log.debug(name.substring(name.length() - 2, name.length()));
+        LOG.debug(name);
+        LOG.debug(name.substring(name.length() - 2, name.length()));
         return name.substring(name.length() - 2, name.length()).toCharArray();
     }
 

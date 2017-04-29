@@ -10,12 +10,6 @@ package de.detecmedia.checkaccountnumber;
  */
 public interface CheckAccountNumber {
 
-
-
-
-
-
-
     /**
      * Added from 1st
      */

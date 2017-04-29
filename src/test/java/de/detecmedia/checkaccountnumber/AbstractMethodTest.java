@@ -271,6 +271,9 @@ public class AbstractMethodTest {
         AbstractMethod instance = new AbstractMethodImpl();
         instance.setAccountNumberArray(accountNumberArray);
         int[] result = instance.getAccountNumberArray();
+        for (int r : result) {
+            System.out.print(r);
+        }
         assertArrayEquals(accountNumberArray, result);
 
     }
@@ -295,9 +298,9 @@ public class AbstractMethodTest {
     @Test
     public void testQuersumme() {
         System.out.println("quersumme");
-        int zahl = 12;
+        int zahl = 1234567890;
         AbstractMethod instance = new AbstractMethodImpl();
-        int expResult = 3;
+        int expResult = 45;
         int result = instance.quersumme(zahl);
         assertEquals(expResult, result);
 
