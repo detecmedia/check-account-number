@@ -2,6 +2,16 @@ package de.detecmedia.checkaccountnumber;
 
 import de.detecmedia.checkaccountnumber.exception.AccountNumberLenghtException;
 
+import static de.detecmedia.checkaccountnumber.constants.AccountNumberPlace.P_10_TH;
+import static de.detecmedia.checkaccountnumber.constants.AccountNumberPlace.P_4_TH;
+import static de.detecmedia.checkaccountnumber.constants.AccountNumberPlace.P_5_TH;
+import static de.detecmedia.checkaccountnumber.constants.Length.L_10;
+import static de.detecmedia.checkaccountnumber.constants.Length.L_6;
+import static de.detecmedia.checkaccountnumber.constants.Length.L_7;
+import static de.detecmedia.checkaccountnumber.constants.Length.L_8;
+import static de.detecmedia.checkaccountnumber.constants.Length.L_9;
+import static de.detecmedia.checkaccountnumber.converter.Weighting.Weighting;
+
 /**
  * Kennzeichen 89.
  * <p>
@@ -36,25 +46,33 @@ import de.detecmedia.checkaccountnumber.exception.AccountNumberLenghtException;
  */
 public class Method89
         extends AbstractMethod {
-    private int[] weighting;
 
+    /**
+     * Test account number.
+     *
+     * @return boolean
+     */
     @Override
     public boolean test() {
         int[] number = expand(this.getAccountNumberArray());
         int length = (this.getLong() + "").length();
-        if (length <= 6 || length >= 10) {
+        if (length <= L_6 || length >= L_10) {
             throw new AccountNumberLenghtException();
         }
-        if (length == 8 || length == 9) {
+        if (length == L_8 || length == L_9) {
             Method10 method10 = new Method10();
             method10.setAccountNumberArray(number);
             return method10.test();
         }
-        if (length == 7) {
-            weighting = new int[]{2, 3, 4, 5, 6, 7};
+        if (length == L_7) {
             Method06 method06 = new Method06();
-            number = method06.factor(number, weighting, 4, 9);
-            int pz = add(number, 3, 9);
+            number = method06.factor(
+                    number,
+                    Weighting("2,3,4,5,6,7").getWeighting(),
+                    P_5_TH,
+                    P_10_TH
+            );
+            int pz = add(number, P_4_TH, P_10_TH);
             pz = method06.modulus11(pz);
             return method06.checkPz(pz, number);
         }

@@ -9,6 +9,9 @@ package de.detecmedia.checkaccountnumber.constants;
  * @version 1.0.0
  */
 public class AccountNumberPlace {
+    /**
+     * c-tor
+     */
     private AccountNumberPlace() {
     }
 
