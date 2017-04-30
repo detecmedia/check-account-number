@@ -11,14 +11,26 @@ import org.apache.log4j.Logger;
  * @author Markus Potthast <mpt@detecmedia.de>
  */
 public class InvalidAcountNumberException extends InvalidException {
+    /**
+     * Logger.
+     */
+    private final Logger logger = Logger.getLogger(
+            InvalidAcountNumberException.class
+    );
 
-    private final Logger logger = Logger.getLogger(InvalidAcountNumberException.class);
-
+    /**
+     * Exception with defined error message.
+     */
     public InvalidAcountNumberException() {
         this("This Check Digit is invalid");
     }
 
-    public InvalidAcountNumberException(String message) {
+    /**
+     * Exception without defined error message.
+     *
+     * @param message error message
+     */
+    public InvalidAcountNumberException(final String message) {
         super(message);
         logger.error(this.getMessage());
     }
