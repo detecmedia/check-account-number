@@ -12,9 +12,16 @@ import org.apache.log4j.Logger;
  */
 public class InvalidException extends RuntimeException {
 
+    /**
+     * Logger.
+     */
     private Logger logger = Logger.getLogger(InvalidException.class);
 
-    public InvalidException(String message) {
+    /**
+     * Exception without defined error message.
+     * @param message error message
+     */
+    public InvalidException(final String message) {
         super(message);
         logger.error(this.getMessage());
     }

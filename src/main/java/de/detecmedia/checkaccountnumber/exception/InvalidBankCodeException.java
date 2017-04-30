@@ -12,13 +12,24 @@ import org.apache.log4j.Logger;
  */
 public class InvalidBankCodeException extends InvalidException {
 
+    /**
+     * Logger.
+     */
     private Logger logger = Logger.getLogger(InvalidBankCodeException.class);
 
+    /**
+     * Exception with defined error message.
+     */
     public InvalidBankCodeException() {
         this("This Bank Code is invalid");
     }
 
-    public InvalidBankCodeException(String message) {
+    /**
+     * Exception without defined error message.
+     *
+     * @param message error message
+     */
+    public InvalidBankCodeException(final String message) {
         super(message);
         logger.error(this.getMessage());
     }
