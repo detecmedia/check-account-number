@@ -1,11 +1,9 @@
 package de.detecmedia.checkaccountnumber;
 
-import de.detecmedia.checkaccountnumber.converter.Weighting;
 import de.detecmedia.checkaccountnumber.exception.InvalidAcountNumberException;
+import org.apache.log4j.Logger;
 
 import java.util.Arrays;
-
-import org.apache.log4j.Logger;
 
 import static de.detecmedia.checkaccountnumber.converter.Weighting.Weighting;
 
@@ -93,13 +91,16 @@ import static de.detecmedia.checkaccountnumber.converter.Weighting.Weighting;
  * @author Markus Potthast
  * @version 0.0.2
  */
-public class Method57
-        extends AbstractMethod {
+public class Method57 extends AbstractMethod {
 
     private int[] weighting;
 
     private static Logger log = Logger.getLogger(Method57.class);
 
+    /**
+     * Test account number.
+     * @return boolean
+     */
     @Override
     public boolean test() {
         int[] number = expand(this.getAccountNumberArray());
@@ -189,11 +190,11 @@ public class Method57
      * sind immer als richtig (= Methode 09; keine Prüfzifferberechnung) zu
      * bewerten.</p>
      *
-     * @param number
-     * @return
+     * @param number account number
+     * @return boolean
      */
     boolean variante1(int[] number) {
-        weighting = new int[]{1, 2, 1, 2, 1, 2, 1, 2, 1};
+        weighting = Weighting("1, 2, 1, 2, 1, 2, 1, 2, 1").getWeighting();
         int firstNumber = Integer.parseInt(number[0] + "" + number[1]);
         log.debug("firstNumber: " + firstNumber);
         if (!(firstNumber == 51
@@ -213,7 +214,7 @@ public class Method57
 
         Method00 method00 = new Method00();
         method00.setAccountNumberArray(number);
-   //     log.debug("accountNumber is: " + getAccountNumber());
+        //     log.debug("accountNumber is: " + getAccountNumber());
 
         return method00.check(Weighting("1, 2, 1, 2, 1, 2, 1, 2, 1"));
     }
@@ -239,11 +240,11 @@ public class Method57
      * Gewichtung: 1 2   1 2 1 2 1 2 1
      * </pre>
      *
-     * @param number
-     * @return
+     * @param number account number
+     * @return boolean
      */
     boolean variante2(int[] number) {
-        weighting = new int[]{1, 2, 1, 2, 1, 2, 1, 0, 2, 1};
+        weighting = Weighting("1, 2, 1, 2, 1, 2, 1, 0, 2, 1").getWeighting();
         int firstNumber = Integer.parseInt(number[0] + "" + number[1]);
         log.debug("firstNumber: " + firstNumber);
         if (!(firstNumber >= 32 && firstNumber <= 39

@@ -14,7 +14,7 @@ import java.util.Arrays;
  * @author markus potthast markus.potthast@detecmedia.de
  * @version 1.0.0
  */
-public final class Factory {
+public final class  Factory {
     /**
      * define logger.
      */
