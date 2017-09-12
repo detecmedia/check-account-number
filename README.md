@@ -1,12 +1,12 @@
 # Check Account Number
 
-Kontonummer prüfen in Java.
+## Prüfzifferberechnung für Kontonummern
 
-befindet sich noch im Aufbau. 
+Info Page for [check digit calculation for account numbers](https://www.bundesbank.de/Navigation/DE/Aufgaben/Unbarer_Zahlungsverkehr/Serviceangebot/Pruefzifferberechnung/pruefzifferberechnung.html) (german)
 
-include from github
+### include maven repo from GitHub
 
-##### Add the repository in the pom.xml
+#### Add the repository in the pom.xml
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -52,7 +52,7 @@ include from github
 </project>
 ```
 
-##### Example
+#### Example
 ```java
 package de.detecmedia.demo;
 
