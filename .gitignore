@@ -24,5 +24,4 @@
 hs_err_pid*
 target/
 check-account-number.iml
-.idea/
-
+.idea
